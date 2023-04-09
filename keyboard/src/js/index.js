@@ -1,4 +1,5 @@
 import "../css/style.css";
 import { Keyboard } from "./keyboard";
 
-new Keyboard();
+let key = new Keyboard();
+console.log(key);
