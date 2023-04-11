@@ -5,6 +5,8 @@ export class Keyboard {
   #keyboardEl;
   #inputGroupEl;
   #inputEl;
+  #keyPress = false;
+  #mouseDown = false;
 
   constructor() {
     this.#assignElement();
@@ -27,6 +29,62 @@ export class Keyboard {
     document.addEventListener("keyup", this.#onKeyup.bind(this));
     // input에 이벤트가 발생할 때마다 콜백함수 실행
     this.#inputEl.addEventListener("input", this.#onInput);
+    this.#keyboardEl.addEventListener(
+      "mousedown",
+      this.#onMouseDown.bind(this)
+    );
+    document.addEventListener("mouseup", this.#onMouseUp.bind(this));
+  }
+
+  #onMouseUp(event) {
+    if (this.#keyPress) return;
+    this.#mouseDown = false;
+    const keyEl = event.target.closest("div.key");
+    const isActive = !!keyEl?.classList.contains("active");
+    // keyEl의 모든 data속성을 포함하는 객체 = 'data-*'의 형태를 출력
+    const val = keyEl?.dataset.val;
+    console.log(val);
+    // 키보드 위, 키보드 밖 화면에서 이벤트가 발생할 수 있기 때문에 document
+    if (isActive && !!val && val !== "Space" && val !== "Backspace") {
+      this.#inputEl.value += val;
+    }
+    if (isActive && val === "Space") {
+      this.#inputEl.value += " ";
+    }
+    if (isActive && val === "Backspace") {
+      this.#inputEl.value = this.#inputEl.value.slice(0, -1);
+    }
+    this.#keyboardEl.querySelector(".active")?.classList.remove("active");
+  }
+
+  #onMouseDown(event) {
+    if (this.#keyPress) return;
+    this.#mouseDown = true;
+    event.target.closest("div.key")?.classList.add("active");
+  }
+  #onInput(event) {
+    event.target.value = event.target.value.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/, "");
+  }
+
+  #onKeydown(event) {
+    if (this.#mouseDown) return;
+    this.#keyPress = true;
+    this.#inputGroupEl.classList.toggle("error", event.key == "Process");
+    this.#keyboardEl
+      .querySelector(`[data-code=${event.code}]`)
+      ?.classList.add("active");
+  }
+
+  #onKeyup(event) {
+    if (this.#mouseDown) return;
+    this.#keyPress = false;
+    this.#keyboardEl
+      .querySelector(`[data-code=${event.code}]`)
+      ?.classList.remove("active");
+  }
+
+  #onChangeFont(event) {
+    document.body.style.fontFamily = event.target.value;
   }
 
   #onChangeTheme(event) {
@@ -34,23 +92,6 @@ export class Keyboard {
       "theme",
       event.target.checked ? "dark-mode" : ""
     );
-  }
-  #onChangeFont(event) {
-    document.body.style.fontFamily = event.target.value;
-  }
-  #onKeyup(event) {
-    this.#keyboardEl
-      .querySelector(`[data-code=${event.code}]`)
-      ?.classList.remove("active");
-  }
-  #onKeydown(event) {
-    this.#inputGroupEl.classList.toggle("error", event.key == "Process");
-    this.#keyboardEl
-      .querySelector(`[data-code=${event.code}]`)
-      ?.classList.add("active");
-  }
-  #onInput(event) {
-    event.target.value = event.target.value.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/, "");
   }
 }
 
