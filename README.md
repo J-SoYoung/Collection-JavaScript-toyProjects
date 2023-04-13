@@ -8,7 +8,7 @@
 - react-hooks을 이용하여 프로젝트를 생성하고 공부합니다.<br>
 
 ### [ keyboard ]
-
+- https://github.com/thdud2262/04-study/tree/master/keyboard
 - webpack, eslint, prettier등을 활용하여 개발환경을 설정합니다.
 - html, css를 이용하여 키보드 레이아웃을 구현합니다.
 - mouse event, keypress 이벤트를 활용하여 키보드 기능을 구현합니다.
