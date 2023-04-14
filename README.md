@@ -14,5 +14,5 @@
 - mouse event, keypress 이벤트를 활용하여 키보드 기능을 구현합니다.
 
 ### [ keyboard-react ]
-
+- https://github.com/thdud2262/04-study/tree/master/keyboard-react
 - 자바스크립트로 구현한 미니 프로젝트를 리액트로 구현합니다.
