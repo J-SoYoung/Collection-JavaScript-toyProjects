@@ -20,12 +20,12 @@ import {
   SwitchLabel,
   SwitchSpan,
 } from "./style/MenuStyle";
-import { InputSection } from "./style/InputStyle";
+import { InputSection, Warning } from "./style/InputStyle";
 
 function App() {
   const [themeCheck, setThemeCheck] = useState(false);
   const [fontStyle, setFontStyle] = useState("TheJamsil5Bold");
-  const [inputText, setInputText] = useState(false);
+  const [inputText, setInputText] = useState("");
   const strRegEx = /^[A-Za-z]+$/;
 
   return (
@@ -63,73 +63,65 @@ function App() {
               value={inputText || ""}
               onChange={(e) => setInputText(e.target.value)}
             />
-            {/* <Warning warning={inputText && "red"}>
+            <Warning warning={inputText && "red"}>
               {!strRegEx.test(inputText) && "영문만 입력해주세요"}
-            </Warning> */}
+            </Warning>
           </div>
         </InputSection>
-        <KeyboardSection>
+        <KeyboardSection
+          onClick={(e) => {
+            console.log("target", e.target);
+            console.log("key만 출력", e.target.matches(".key"));
+            if (e.target.matches(".key")) {
+              setInputText(
+                (prevInputText) => prevInputText + e.target.textContent
+              );
+            }
+          }}
+        >
           <div>
             <Row>
-              <Key
-                align={true}
-                className="key"
-                data-code="Backquote"
-                data-val="`"
-              >
-                <span className="two-value">~</span>
-                <span className="two-value">`</span>
+              <Key className="f_key" data-code="Backquote" data-val="`">
+                `
               </Key>
-              <Key align={true} className="key" data-code="Digit1" data-val="1">
-                <span className="two-value">!</span>
-                <span className="two-value">1</span>
+              <Key className="key" data-code="Digit1" data-val="1">
+                1
               </Key>
-              <Key align={true} className="key" data-code="Digit2" data-val="2">
-                <span className="two-value">@</span>
-                <span className="two-value">2</span>
+              <Key className="key" data-code="Digit2" data-val="2">
+                2
               </Key>
-              <Key align={true} className="key" data-code="Digit3" data-val="3">
-                <span className="two-value">#</span>
-                <span className="two-value">3</span>
+              <Key className="key" data-code="Digit3" data-val="3">
+                3
               </Key>
-              <Key align={true} className="key" data-code="Digit4" data-val="4">
-                <span className="two-value">$</span>
-                <span className="two-value">4</span>
+              <Key className="key" data-code="Digit4" data-val="4">
+                4
               </Key>
-              <Key align={true} className="key" data-code="Digit5" data-val="5">
-                <span className="two-value">%</span>
-                <span className="two-value">5</span>
+              <Key className="key" data-code="Digit5" data-val="5">
+                5
               </Key>
-              <Key align={true} className="key" data-code="Digit6" data-val="6">
-                <span className="two-value">^</span>
-                <span className="two-value">6</span>
+              <Key className="key" data-code="Digit6" data-val="6">
+                6
               </Key>
-              <Key align={true} className="key" data-code="Digit7" data-val="7">
-                <span className="two-value">&</span>
-                <span className="two-value">7</span>
+              <Key className="key" data-code="Digit7" data-val="7">
+                7
               </Key>
-              <Key align={true} className="key" data-code="Digit8" data-val="8">
-                <span className="two-value">*</span>
-                <span className="two-value">8</span>
+              <Key className="key" data-code="Digit8" data-val="8">
+                8
               </Key>
-              <Key align={true} className="key" data-code="Digit9" data-val="9">
-                <span className="two-value">(</span>
-                <span className="two-value">9</span>
+              <Key className="key" data-code="Digit9" data-val="9">
+                9
               </Key>
-              <Key align={true} className="key" data-code="Digit0" data-val="0">
-                <span className="two-value">)</span>
-                <span className="two-value">0</span>
+              <Key className="key" data-code="Digit0" data-val="0">
+                0
               </Key>
-              <Key align={true} className="key" data-code="Minus" data-val="-">
-                <span className="two-value">_</span>
-                <span className="two-value">-</span>
+              <Key className="f_key" data-code="Minus" data-val="-">
+                -
               </Key>
-              <Key align={true} className="key" data-code="Equal" data-val="=">
-                <span className="two-value">+</span>
-                <span className="two-value">=</span>
+              <Key className="f_key" data-code="Equal" data-val="=">
+                =
               </Key>
               <Backspace
-                className="key back-space-key"
+                className="f_key back-space-key"
                 data-code="Backspace"
                 data-val="Backspace"
               >
@@ -137,7 +129,7 @@ function App() {
               </Backspace>
             </Row>
             <Row>
-              <FnKey className="key tab-key">Tab</FnKey>
+              <FnKey className="f_key tab-key">Tab</FnKey>
               <Key className="key" data-code="KeyQ" data-val="q">
                 Q
               </Key>
@@ -170,7 +162,7 @@ function App() {
               </Key>
               <Key
                 align={true}
-                className="key"
+                className="f_key"
                 data-code="BracketLeft"
                 data-val="["
               >
@@ -179,7 +171,7 @@ function App() {
               </Key>
               <Key
                 align={true}
-                className="key"
+                className="f_key"
                 data-code="BracketRight"
                 data-val="]"
               >
@@ -188,7 +180,7 @@ function App() {
               </Key>
               <FnKey
                 align={true}
-                className="key back-slash-key"
+                className="f_key back-slash-key"
                 data-code="Backslash"
                 data-val="\"
               >
@@ -197,7 +189,7 @@ function App() {
               </FnKey>
             </Row>
             <Row>
-              <CapsKey className="key caps-lock-key">CapsLock</CapsKey>
+              <CapsKey className="f_key caps-lock-key">CapsLock</CapsKey>
               <Key className="key" data-code="KeyA" data-val="a">
                 A
               </Key>
@@ -227,23 +219,28 @@ function App() {
               </Key>
               <Key
                 align={true}
-                className="key"
+                className="f_key"
                 data-code="Semicolon"
                 data-val=";"
               >
                 <span className="two-value">:</span>
                 <span className="two-value">;</span>
               </Key>
-              <Key align={true} className="key" data-code="Quote" data-val="'">
+              <Key
+                align={true}
+                className="f_key"
+                data-code="Quote"
+                data-val="'"
+              >
                 <span className="two-value">"</span>
                 <span className="two-value">'</span>
               </Key>
-              <EnterKey className="key enter-key" data-code="Enter">
+              <EnterKey className="f_key enter-key" data-code="Enter">
                 Enter
               </EnterKey>
             </Row>
             <Row>
-              <LeftShift className="key left-shift-key" data-code="ShiftLeft">
+              <LeftShift className="f_key left-shift-key" data-code="ShiftLeft">
                 Shift
               </LeftShift>
               <Key className="key" data-code="KeyZ" data-val="z">
@@ -267,40 +264,55 @@ function App() {
               <Key className="key" data-code="KeyM" data-val="m">
                 M
               </Key>
-              <Key align={true} className="key" data-code="Comma" data-val=",">
+              <Key
+                align={true}
+                className="f_key"
+                data-code="Comma"
+                data-val=","
+              >
                 <span className="two-value">&lt;</span>
                 <span className="two-value">,</span>
               </Key>
-              <Key align={true} className="key" data-code="Period" data-val=".">
+              <Key
+                align={true}
+                className="f_key"
+                data-code="Period"
+                data-val="."
+              >
                 <span className="two-value">&gt;</span>
                 <span className="two-value">.</span>
               </Key>
-              <Key align={true} className="key" data-code="Slash" data-val="/">
+              <Key
+                align={true}
+                className="f_key"
+                data-code="Slash"
+                data-val="/"
+              >
                 <span className="two-value">?</span>
                 <span className="two-value">/</span>
               </Key>
               <RightShift
-                className="key right-shift-key"
+                className="f_key right-shift-key"
                 data-code="ShiftRight"
               >
                 Shift
               </RightShift>
             </Row>
             <Row>
-              <SubKey className="key fn-key">Ctrl</SubKey>
-              <SubKey className="key fn-key">-</SubKey>
-              <SubKey className="key fn-key">Alt</SubKey>
+              <SubKey className="f_key fn-key">Ctrl</SubKey>
+              <SubKey className="f_key fn-key">-</SubKey>
+              <SubKey className="f_key fn-key">Alt</SubKey>
               <SpaceKey
-                className="key space-key"
+                className="f_key space-key"
                 data-code="Space"
                 data-val="Space"
               >
                 Space
               </SpaceKey>
-              <SubKey className="key fn-key">Alt</SubKey>
-              <SubKey className="key fn-key">Fn</SubKey>
-              <SubKey className="key fn-key">-</SubKey>
-              <SubKey className="key fn-key">Ctrl</SubKey>
+              <SubKey className="f_key fn-key">Alt</SubKey>
+              <SubKey className="f_key fn-key">Fn</SubKey>
+              <SubKey className="f_key fn-key">-</SubKey>
+              <SubKey className="f_key fn-key">Ctrl</SubKey>
             </Row>
           </div>
         </KeyboardSection>
