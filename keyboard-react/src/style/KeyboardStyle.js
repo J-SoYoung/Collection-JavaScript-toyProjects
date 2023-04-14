@@ -39,6 +39,7 @@ export const Key = styled.div`
     background-color: lightgray;
   }
 `;
+export const f_key = styled.div(Key);
 export const Backspace = styled(Key)`
   width: 130px;
   justify-content: center;
