@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 
+import styled from "styled-components";
 import {
-  AppStyle,
   Backspace,
-  Key,
-  KeyboardSection,
-  Row,
-  FnKey,
   CapsKey,
   EnterKey,
+  FnKey,
+  Key,
+  KeyboardSection,
   LeftShift,
   RightShift,
-  SubKey,
+  Row,
   SpaceKey,
+  SubKey,
 } from "./style/KeyboardStyle";
 import {
   MenuSection,
@@ -20,14 +20,38 @@ import {
   SwitchLabel,
   SwitchSpan,
 } from "./style/MenuStyle";
-import { InputSection, Warning } from "./style/InputStyle";
+import { InputSection } from "./style/InputStyle";
 
 function App() {
   const [themeCheck, setThemeCheck] = useState(false);
   const [fontStyle, setFontStyle] = useState("TheJamsil5Bold");
-  const [inputText, setInputText] = useState("");
-  const strRegEx = /^[A-Za-z]+$/;
 
+  const [inputText, setInputText] = useState("");
+
+  const handleMouseClick = (e) => {
+    if (e.target.matches(".key")) {
+      setInputText((prevInputText) => prevInputText + e.target.textContent);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.code.slice(0, 3) === "Key") {
+      setInputText((prevInputText) => prevInputText + e.code[3]);
+    }
+    if (e.code.slice(0, 5) === "Digit") {
+      setInputText((prevInputText) => prevInputText + e.key);
+    }
+    if (e.code === "Space") {
+      setInputText((prevInputText) => prevInputText + " ");
+    }
+    if (e.code === "Backspace") {
+      setInputText((prevInputText) => prevInputText.slice(0, -1));
+    }
+  };
+
+  const handleDelete = () => {
+    setInputText("");
+  };
   return (
     <AppStyle themeCheck={themeCheck} fontStyle={fontStyle}>
       <div>
@@ -61,24 +85,12 @@ function App() {
             <input
               type="text"
               value={inputText || ""}
-              onChange={(e) => setInputText(e.target.value)}
+              onKeyDown={handleKeyDown}
             />
-            <Warning warning={inputText && "red"}>
-              {!strRegEx.test(inputText) && "영문만 입력해주세요"}
-            </Warning>
+            <button onClick={handleDelete}>전체 지우기</button>
           </div>
         </InputSection>
-        <KeyboardSection
-          onClick={(e) => {
-            console.log("target", e.target);
-            console.log("key만 출력", e.target.matches(".key"));
-            if (e.target.matches(".key")) {
-              setInputText(
-                (prevInputText) => prevInputText + e.target.textContent
-              );
-            }
-          }}
-        >
+        <KeyboardSection onClick={handleMouseClick}>
           <div>
             <Row>
               <Key className="f_key" data-code="Backquote" data-val="`">
@@ -321,4 +333,13 @@ function App() {
   );
 }
 
+const AppStyle = styled.div`
+  width: 1100px;
+  background-color: white;
+  /* themeCheck 값이 true일 때, filter 스타일 적용 */
+  ${(props) => props.themeCheck && `filter: invert(100%) hue-rotate(180deg);`}
+  font-family: ${(props) => props.fontStyle};
+  padding: 30px 24px;
+  box-sizing: border-box;
+`;
 export default App;

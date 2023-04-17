@@ -19,5 +19,5 @@ export const InputSection = styled.section`
 `;
 
 export const Warning = styled.p`
-  color: ${(props) => props.warning};
+  color: red;
 `;

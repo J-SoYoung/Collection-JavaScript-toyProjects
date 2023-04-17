@@ -1,16 +1,6 @@
 import styled from "styled-components";
 import "./App.css";
 
-export const AppStyle = styled.div`
-  width: 1100px;
-  background-color: white;
-  /* themeCheck 값이 true일 때, filter 스타일 적용 */
-  ${(props) => props.themeCheck && `filter: invert(100%) hue-rotate(180deg);`}
-  font-family: ${(props) => props.fontStyle};
-  padding: 30px 24px;
-  box-sizing: border-box;
-`;
-
 export const KeyboardSection = styled.section`
   background-color: gray;
   color: gray;
