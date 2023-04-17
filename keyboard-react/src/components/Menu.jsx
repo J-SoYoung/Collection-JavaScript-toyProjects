@@ -1,14 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
+
+import {
+  MenuSection,
+  SwitchInput,
+  SwitchLabel,
+  SwitchSpan,
+} from "../style/MenuStyle";
+import { KeyboardThemeContext } from "../App";
 
 function Menu() {
   const [themeCheck, setThemeCheck] = useState(false);
   const [fontStyle, setFontStyle] = useState("TheJamsil5Bold");
-
+  const aa = useContext(KeyboardThemeContext);
+  console.log(aa);
+  
   return (
     <MenuSection>
-      <label className="switch">
-        <input
+      <SwitchLabel className="switch">
+        <SwitchInput
           id="switch"
           type="checkbox"
           value={themeCheck}
@@ -16,8 +26,8 @@ function Menu() {
             setThemeCheck(e.target.checked);
           }}
         />
-        <span className="slider"></span>
-      </label>
+        <SwitchSpan className="slider"></SwitchSpan>
+      </SwitchLabel>
       <div className="select-box">
         <label>Font : </label>
         <select
@@ -33,11 +43,11 @@ function Menu() {
   );
 }
 
-const MenuSection = styled.section`
-  border: 1px solid red;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 16px;
-`;
+// const MenuSection = styled.section`
+//   border: 1px solid red;
+//   display: flex;
+//   justify-content: flex-start;
+//   align-items: center;
+//   padding: 16px;
+// `;
 export default Menu;
