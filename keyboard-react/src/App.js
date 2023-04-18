@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import styled from "styled-components";
 import {
@@ -25,8 +25,8 @@ import { InputSection } from "./style/InputStyle";
 function App() {
   const [themeCheck, setThemeCheck] = useState(false);
   const [fontStyle, setFontStyle] = useState("TheJamsil5Bold");
-
   const [inputText, setInputText] = useState("");
+  const keyRefs = useRef([]);
 
   const handleMouseClick = (e) => {
     if (e.target.matches(".key")) {
@@ -35,6 +35,9 @@ function App() {
   };
 
   const handleKeyDown = (e) => {
+    const keyTarget = e.code;
+    // console.log(keyTarget);
+    // console.log(keyRefs.current[keyTarget].getAttribute("data-code"));
     if (e.code.slice(0, 3) === "Key") {
       setInputText((prevInputText) => prevInputText + e.code[3]);
     }
@@ -47,11 +50,30 @@ function App() {
     if (e.code === "Backspace") {
       setInputText((prevInputText) => prevInputText.slice(0, -1));
     }
+
+    // 키보드가 눌렸을 때, ref로 눌린 태그를 찾는다.
+    if (keyRefs.current[keyTarget]?.getAttribute("data-code") === undefined) {
+      return;
+    }
+    if (e.code === keyRefs.current[keyTarget].getAttribute("data-code")) {
+      keyRefs.current[keyTarget].style.backgroundColor = "lightgray";
+    }
+  };
+
+  const handleKeyUp = (e) => {
+    const keyTarget = e.code;
+    if (keyRefs.current[keyTarget]?.getAttribute("data-code") === undefined) {
+      return;
+    }
+    if (e.code === keyRefs.current[keyTarget].getAttribute("data-code")) {
+      keyRefs.current[keyTarget].style.backgroundColor = "white";
+    }
   };
 
   const handleDelete = () => {
     setInputText("");
   };
+
   return (
     <AppStyle themeCheck={themeCheck} fontStyle={fontStyle}>
       <div>
@@ -86,6 +108,7 @@ function App() {
               type="text"
               value={inputText || ""}
               onKeyDown={handleKeyDown}
+              onKeyUp={handleKeyUp}
             />
             <button onClick={handleDelete}>전체 지우기</button>
           </div>
@@ -96,40 +119,100 @@ function App() {
               <Key className="f_key" data-code="Backquote" data-val="`">
                 `
               </Key>
-              <Key className="key" data-code="Digit1" data-val="1">
+              <Key
+                ref={(el) => (keyRefs.current["Digit1"] = el)}
+                className="key"
+                data-code="Digit1"
+                data-val="1"
+              >
                 1
               </Key>
-              <Key className="key" data-code="Digit2" data-val="2">
+              <Key
+                ref={(el) => (keyRefs.current["Digit2"] = el)}
+                className="key"
+                data-code="Digit2"
+                data-val="2"
+              >
                 2
               </Key>
-              <Key className="key" data-code="Digit3" data-val="3">
+              <Key
+                ref={(el) => (keyRefs.current["Digit3"] = el)}
+                className="key"
+                data-code="Digit3"
+                data-val="3"
+              >
                 3
               </Key>
-              <Key className="key" data-code="Digit4" data-val="4">
+              <Key
+                ref={(el) => (keyRefs.current["Digit4"] = el)}
+                className="key"
+                data-code="Digit4"
+                data-val="4"
+              >
                 4
               </Key>
-              <Key className="key" data-code="Digit5" data-val="5">
+              <Key
+                ref={(el) => (keyRefs.current["Digit5"] = el)}
+                className="key"
+                data-code="Digit5"
+                data-val="5"
+              >
                 5
               </Key>
-              <Key className="key" data-code="Digit6" data-val="6">
+              <Key
+                ref={(el) => (keyRefs.current["Digit6"] = el)}
+                className="key"
+                data-code="Digit6"
+                data-val="6"
+              >
                 6
               </Key>
-              <Key className="key" data-code="Digit7" data-val="7">
+              <Key
+                ref={(el) => (keyRefs.current["Digit7"] = el)}
+                className="key"
+                data-code="Digit7"
+                data-val="7"
+              >
                 7
               </Key>
-              <Key className="key" data-code="Digit8" data-val="8">
+              <Key
+                ref={(el) => (keyRefs.current["Digit8"] = el)}
+                className="key"
+                data-code="Digit8"
+                data-val="8"
+              >
                 8
               </Key>
-              <Key className="key" data-code="Digit9" data-val="9">
+              <Key
+                ref={(el) => (keyRefs.current["Digit9"] = el)}
+                className="key"
+                data-code="Digit9"
+                data-val="9"
+              >
                 9
               </Key>
-              <Key className="key" data-code="Digit0" data-val="0">
+              <Key
+                ref={(el) => (keyRefs.current["Digit0"] = el)}
+                className="key"
+                data-code="Digit0"
+                data-val="0"
+              >
                 0
               </Key>
-              <Key className="f_key" data-code="Minus" data-val="-">
+              <Key
+                ref={(el) => (keyRefs.current["Minus"] = el)}
+                className="f_key"
+                data-code="Minus"
+                data-val="-"
+              >
                 -
               </Key>
-              <Key className="f_key" data-code="Equal" data-val="=">
+              <Key
+                ref={(el) => (keyRefs.current["Equal"] = el)}
+                className="f_key"
+                data-code="Equal"
+                data-val="="
+              >
                 =
               </Key>
               <Backspace
@@ -142,34 +225,84 @@ function App() {
             </Row>
             <Row>
               <FnKey className="f_key tab-key">Tab</FnKey>
-              <Key className="key" data-code="KeyQ" data-val="q">
+              <Key
+                ref={(el) => (keyRefs.current["KeyQ"] = el)}
+                className="key"
+                data-code="KeyQ"
+                data-val="q"
+              >
                 Q
               </Key>
-              <Key className="key" data-code="KeyW" data-val="w">
+              <Key
+                ref={(el) => (keyRefs.current["KeyW"] = el)}
+                className="key"
+                data-code="KeyW"
+                data-val="w"
+              >
                 W
               </Key>
-              <Key className="key" data-code="KeyE" data-val="e">
+              <Key
+                ref={(el) => (keyRefs.current["KeyE"] = el)}
+                className="key"
+                data-code="KeyE"
+                data-val="e"
+              >
                 E
               </Key>
-              <Key className="key" data-code="KeyR" data-val="r">
+              <Key
+                ref={(el) => (keyRefs.current["KeyR"] = el)}
+                className="key"
+                data-code="KeyR"
+                data-val="r"
+              >
                 R
               </Key>
-              <Key className="key" data-code="KeyT" data-val="t">
+              <Key
+                ref={(el) => (keyRefs.current["KeyT"] = el)}
+                className="key"
+                data-code="KeyT"
+                data-val="t"
+              >
                 T
               </Key>
-              <Key className="key" data-code="KeyY" data-val="y">
+              <Key
+                ref={(el) => (keyRefs.current["KeyY"] = el)}
+                className="key"
+                data-code="KeyY"
+                data-val="y"
+              >
                 Y
               </Key>
-              <Key className="key" data-code="KeyU" data-val="u">
+              <Key
+                ref={(el) => (keyRefs.current["KeyU"] = el)}
+                className="key"
+                data-code="KeyU"
+                data-val="u"
+              >
                 U
               </Key>
-              <Key className="key" data-code="KeyI" data-val="i">
+              <Key
+                ref={(el) => (keyRefs.current["KeyI"] = el)}
+                className="key"
+                data-code="KeyI"
+                data-val="i"
+              >
                 I
               </Key>
-              <Key className="key" data-code="KeyO" data-val="o">
+              <Key
+                ref={(el) => (keyRefs.current["KeyO"] = el)}
+                className="key"
+                data-code="KeyO"
+                data-val="o"
+              >
                 O
               </Key>
-              <Key className="key" data-code="KeyP" data-val="p">
+              <Key
+                ref={(el) => (keyRefs.current["KeyP"] = el)}
+                className="key"
+                data-code="KeyP"
+                data-val="p"
+              >
                 P
               </Key>
               <Key
@@ -202,31 +335,76 @@ function App() {
             </Row>
             <Row>
               <CapsKey className="f_key caps-lock-key">CapsLock</CapsKey>
-              <Key className="key" data-code="KeyA" data-val="a">
+              <Key
+                ref={(el) => (keyRefs.current["KeyA"] = el)}
+                className="key"
+                data-code="KeyA"
+                data-val="a"
+              >
                 A
               </Key>
-              <Key className="key" data-code="KeyS" data-val="s">
+              <Key
+                ref={(el) => (keyRefs.current["KeyS"] = el)}
+                className="key"
+                data-code="KeyS"
+                data-val="s"
+              >
                 S
               </Key>
-              <Key className="key" data-code="KeyD" data-val="d">
+              <Key
+                ref={(el) => (keyRefs.current["KeyD"] = el)}
+                className="key"
+                data-code="KeyD"
+                data-val="d"
+              >
                 D
               </Key>
-              <Key className="key" data-code="KeyF" data-val="f">
+              <Key
+                ref={(el) => (keyRefs.current["KeyF"] = el)}
+                className="key"
+                data-code="KeyF"
+                data-val="f"
+              >
                 F
               </Key>
-              <Key className="key" data-code="KeyG" data-val="g">
+              <Key
+                ref={(el) => (keyRefs.current["KeyG"] = el)}
+                className="key"
+                data-code="KeyG"
+                data-val="g"
+              >
                 G
               </Key>
-              <Key className="key" data-code="KeyH" data-val="h">
+              <Key
+                ref={(el) => (keyRefs.current["KeyH"] = el)}
+                className="key"
+                data-code="KeyH"
+                data-val="h"
+              >
                 H
               </Key>
-              <Key className="key" data-code="KeyJ" data-val="j">
+              <Key
+                ref={(el) => (keyRefs.current["KeyJ"] = el)}
+                className="key"
+                data-code="KeyJ"
+                data-val="j"
+              >
                 J
               </Key>
-              <Key className="key" data-code="KeyK" data-val="k">
+              <Key
+                ref={(el) => (keyRefs.current["KeyK"] = el)}
+                className="key"
+                data-code="KeyK"
+                data-val="k"
+              >
                 K
               </Key>
-              <Key className="key" data-code="KeyL" data-val="l">
+              <Key
+                ref={(el) => (keyRefs.current["KeyL"] = el)}
+                className="key"
+                data-code="KeyL"
+                data-val="l"
+              >
                 L
               </Key>
               <Key
@@ -255,25 +433,60 @@ function App() {
               <LeftShift className="f_key left-shift-key" data-code="ShiftLeft">
                 Shift
               </LeftShift>
-              <Key className="key" data-code="KeyZ" data-val="z">
+              <Key
+                ref={(el) => (keyRefs.current["KeyZ"] = el)}
+                className="key"
+                data-code="KeyZ"
+                data-val="z"
+              >
                 Z
               </Key>
-              <Key className="key" data-code="KeyX" data-val="x">
+              <Key
+                ref={(el) => (keyRefs.current["KeyX"] = el)}
+                className="key"
+                data-code="KeyX"
+                data-val="x"
+              >
                 X
               </Key>
-              <Key className="key" data-code="KeyC" data-val="c">
+              <Key
+                ref={(el) => (keyRefs.current["KeyC"] = el)}
+                className="key"
+                data-code="KeyC"
+                data-val="c"
+              >
                 C
               </Key>
-              <Key className="key" data-code="KeyV" data-val="v">
+              <Key
+                ref={(el) => (keyRefs.current["KeyV"] = el)}
+                className="key"
+                data-code="KeyV"
+                data-val="v"
+              >
                 V
               </Key>
-              <Key className="key" data-code="KeyB" data-val="b">
+              <Key
+                ref={(el) => (keyRefs.current["KeyB"] = el)}
+                className="key"
+                data-code="KeyB"
+                data-val="b"
+              >
                 B
               </Key>
-              <Key className="key" data-code="KeyN" data-val="n">
+              <Key
+                ref={(el) => (keyRefs.current["KeyN"] = el)}
+                className="key"
+                data-code="KeyN"
+                data-val="n"
+              >
                 N
               </Key>
-              <Key className="key" data-code="KeyM" data-val="m">
+              <Key
+                ref={(el) => (keyRefs.current["KeyM"] = el)}
+                className="key"
+                data-code="KeyM"
+                data-val="m"
+              >
                 M
               </Key>
               <Key
