@@ -14,9 +14,10 @@ https://www.notion.so/fun-blog/PJ-4-03a567f49ea142cdaf22d2e124131696 <br>
 - mouse event, keypress 이벤트를 활용하여 키보드 기능을 구현합니다.
 
 ### [ keyboard-react ]
+- 🔎 https://github.com/thdud2262/04-study/tree/master/keyboard-react
+ 
 ![image](https://user-images.githubusercontent.com/85012454/232808231-0221c76b-d1dc-43dd-af11-daedc03fd4ac.png)
 
-- 🔎 https://github.com/thdud2262/04-study/tree/master/keyboard-react
 - 위에서 자바스크립트로 구현한 미니 프로젝트를 리액트로 구현합니다.
 - onKeyDown, onKeyUp이벤트를 활용합니다. 
 - styled-component를 활용하여 스타일을 동적으로 설정합니다.
