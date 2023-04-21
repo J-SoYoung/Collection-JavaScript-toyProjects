@@ -1,14 +1,14 @@
-# webpack-boilerplate
+# Image-slider
 
-webpack boilterplate 입니다.<br><br> eslint-config-airbnb 가 적용되어있습니다. <br><br> 다운로드 혹은 git clone 하여 `npm install` 실행 후 사용하시면 됩니다.
+자바스크립트로 이미지 슬라이더를 구현하라. 📕WIL : https://www.notion.so/fun-blog/4-3-WIL-89ae92bb8de349ab921888262c5174af
 
+- setTimeout, setInterval를 이용하여 이미지 슬라이더를 구현합니다
 
 ## Installation
 
 ```bash
 > npm install
 ```
-
 
 ## Run Dev Server
 
