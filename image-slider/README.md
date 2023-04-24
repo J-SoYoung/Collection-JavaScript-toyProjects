@@ -12,7 +12,9 @@
 - setTimeout, setInterval를 이용하여 이미지 슬라이더를 구현합니다<br>
 <br>
 
-![image](https://user-images.githubusercontent.com/85012454/233810284-7039c23c-d3d9-4b2a-ade0-f99e128c3ee8.png)
+https://user-images.githubusercontent.com/85012454/233993952-5fac02b5-78d3-4b85-b559-a11b8492735a.mp4
+
+
 
 ## Installation
 
