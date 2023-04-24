@@ -3,12 +3,15 @@ export default class ImageSlider {
   #currentPosition = 0;
   #slideNumber = 0;
   #slideWidth = 0;
+  #intervalId;
+  #autoPlay = true;
 
   // 클래스 필드: 프로퍼티를 public으로 설정
   sliderWrapEl;
   sliderListEl;
   nextBtnEl;
   previousBtnEl;
+  controlWrapEl;
 
   constructor() {
     this.assignElement();
@@ -18,6 +21,7 @@ export default class ImageSlider {
     this.addEvent();
     this.createIndicator();
     this.setIndicator();
+    this.initAutoPlay();
   }
 
   assignElement() {
@@ -26,9 +30,9 @@ export default class ImageSlider {
     this.nextBtnEl = this.sliderWrapEl.querySelector('#next');
     this.previousBtnEl = this.sliderWrapEl.querySelector('#previous');
     this.indicatorWrapEl = this.sliderWrapEl.querySelector('#indicator-wrap');
+    this.controlWrapEl = this.sliderWrapEl.querySelector('#control-wrap');
   }
 
-  // 초기화 함수들
   initSliderNumber() {
     this.#slideNumber = this.sliderListEl.querySelectorAll('li').length;
   }
@@ -51,16 +55,8 @@ export default class ImageSlider {
       'click',
       this.onClickIndicator.bind(this),
     );
-  }
-  onClickIndicator(event) {
-    const indexPosition = parseInt(event.target.dataset.index);
-    if (!isNaN(indexPosition)) {
-      this.#currentPosition = indexPosition;
-      this.sliderListEl.style.left = `-${
-        this.#slideWidth * this.#currentPosition
-      }px`;
-      this.setIndicator();
-    }
+    // auto control btn 클릭
+    this.controlWrapEl.addEventListener('click', this.togglePlay.bind(this));
   }
 
   moveToRight() {
@@ -71,6 +67,11 @@ export default class ImageSlider {
     this.sliderListEl.style.left = `-${
       this.#slideWidth * this.#currentPosition
     }px`;
+    if (this.#autoPlay) {
+      // intervalId가 새로 적용된다면 setTime을 끄고 다시시작함
+      clearInterval(this.#intervalId);
+      this.#intervalId = setInterval(this.moveToRight.bind(this), 3000);
+    }
     this.setIndicator();
   }
 
@@ -82,7 +83,23 @@ export default class ImageSlider {
     this.sliderListEl.style.left = `-${
       this.#slideWidth * this.#currentPosition
     }px`;
+    if (this.#autoPlay) {
+      // intervalId가 새로 적용된다면 setTime을 끄고 다시시작함
+      clearInterval(this.#intervalId);
+      this.#intervalId = setInterval(this.moveToRight.bind(this), 3000);
+    }
     this.setIndicator();
+  }
+
+  onClickIndicator(event) {
+    const indexPosition = parseInt(event.target.dataset.index);
+    if (!isNaN(indexPosition)) {
+      this.#currentPosition = indexPosition;
+      this.sliderListEl.style.left = `-${
+        this.#slideWidth * this.#currentPosition
+      }px`;
+      this.setIndicator();
+    }
   }
 
   createIndicator() {
@@ -101,5 +118,22 @@ export default class ImageSlider {
     this.indicatorWrapEl
       .querySelector(`ul li:nth-child(${this.#currentPosition + 1})`)
       .classList.add('active');
+  }
+
+  initAutoPlay() {
+    this.#intervalId = setInterval(this.moveToRight.bind(this), 2000);
+  }
+  togglePlay(event) {
+    if (event.target.dataset.status === 'play') {
+      this.#autoPlay = true;
+      this.controlWrapEl.classList.add('play');
+      this.controlWrapEl.classList.remove('pause');
+      this.initAutoPlay();
+    } else if (event.target.dataset.status === 'pause') {
+      this.#autoPlay = false;
+      this.controlWrapEl.classList.remove('play');
+      this.controlWrapEl.classList.add('pause');
+      clearInterval(this.#intervalId);
+    }
   }
 }
