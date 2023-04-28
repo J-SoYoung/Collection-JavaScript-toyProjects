@@ -4,11 +4,9 @@ export const ImgColor = [
   "red",
   "orange",
   "yellow",
-  "orange",
   "green",
   "blue",
   "violet",
-  "green",
   "indigo",
 ];
 
