@@ -3,26 +3,46 @@ import styled from "styled-components";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import { FaPlay } from "react-icons/fa";
 import { GiPauseButton } from "react-icons/gi";
-import { ImgColor, ImgList } from "../unit/ImgInfo";
+import { ImgColor, ImgList } from "./ImgInfo";
 
 function Main() {
   const [autoPlay, setAutoPlay] = useState(true);
   const [movePx, setMovePx] = useState(0);
+  const [curImageIndex, setCurImageIndex] = useState(0);
+  const [indicator, setIndicator] = useState(true);
+
+  const ImgColor = [
+    "red",
+    "orange",
+    "yellow",
+    "green",
+    "blue",
+    "violet",
+    "indigo",
+  ];
 
   const handleMovePrev = () => {
-    if (movePx === 0) {
+    if (curImageIndex === 0) {
+      setCurImageIndex(ImgColor.length - 1);
       setMovePx(-((ImgColor.length - 1) * 500));
       return;
     }
-    setMovePx(movePx + 500);
+    setCurImageIndex(curImageIndex - 1);
+    setMovePx(-((curImageIndex - 1) * 500));
   };
 
   const handleMoveNext = () => {
-    if (movePx === -((ImgColor.length - 1) * 500)) {
+    if (curImageIndex === ImgColor.length - 1) {
+      setCurImageIndex(0);
       setMovePx(0);
       return;
     }
-    setMovePx(movePx - 500);
+    setCurImageIndex(curImageIndex + 1);
+    setMovePx(-((curImageIndex + 1) * 500));
+  };
+  console.log(curImageIndex);
+  const handleMoveIndicator = (idx) => {
+    idx === curImageIndex ? setIndicator(true) : setIndicator(false);
   };
 
   const handleAutoPlay = () => {
@@ -30,11 +50,18 @@ function Main() {
     setAutoPlay(!autoPlay);
   };
 
+  const imgList = ImgColor.map((el, idx) => (
+    <li key={idx}>
+      <img src={`./img/${el}.jpeg`} />
+    </li>
+  ));
+  console.log(indicator);
   return (
     <>
       <SliderWrap>
         <SliderList movePx={movePx}>
           <ImgList />
+          {/* {imgList} */}
         </SliderList>
         <ButtonBox>
           <BtnPrev onClick={handleMovePrev}>
@@ -47,7 +74,11 @@ function Main() {
         <IndicatorBox>
           <ul>
             {ImgColor.map((el, idx) => (
-              <li key={idx}></li>
+              <li
+                key={idx}
+                onClick={() => handleMoveIndicator(idx)}
+                className={indicator ? "active" : ""}
+              ></li>
             ))}
           </ul>
         </IndicatorBox>
@@ -127,11 +158,11 @@ const IndicatorBox = styled.div`
       cursor: pointer;
       margin: 0 5px;
       background-color: white;
-      opacity: 0.5;
       border-radius: 8px;
-      :active {
-        opacity: 1;
-      }
+      opacity: 0.5;
+    }
+    &.active {
+      opacity: 1;
     }
   }
 `;
