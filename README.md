@@ -30,3 +30,9 @@ https://www.notion.so/fun-blog/PJ-4-03a567f49ea142cdaf22d2e124131696 <br>
 - webpack모듈에서 image파일을 js-inline으로 설정하여 js와 함께 번들링합니다.
 - li태그에 img파일을 삽입하고, 버튼을 클릭할 때마다 li의 위치를 변경하여 image-slider를 구현합니다.
 - prev, next버튼, indicator를 구현하고 setInterval을 활용하여 auto-paly를 구현합니다.
+
+### [ image-slider - react ]
+- 🔎 https://github.com/thdud2262/04-study/tree/master/image-slider-react
+- useEffect를 활용하여 렌더링 직후 autoPlay가 되도록 구현합니다. ( + 정리함수 )
+- img슬라이드와 indicator를 img데이터에 따라 동적으로 생성되도록 구현합니다.
+- useState로 currentSlider값을 관리하여 slider의 현재 index를 화면에 띄워줍니다.
