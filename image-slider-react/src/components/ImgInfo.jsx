@@ -10,11 +10,4 @@ export const ImgColor = [
   "indigo",
 ];
 
-export const ImgList = () => {
-  const imgList = ImgColor.map((el, idx) => (
-    <li key={idx}>
-      <img src={`./img/${el}.jpeg`}/>
-    </li>
-  ));
-  return <>{imgList}</>;
-};
+export const CatImg = ["cat1", "cat2", "cat3", "cat4", "cat5", "cat6"];
