@@ -1,12 +1,10 @@
 import "./App.css";
-import Main from "./components/Main";
-import Seconds from "./components/Seconds";
+import Home from "./components/Home";
 
 function App() {
   return (
     <div className="App">
-      <Main />
-      {/* <Seconds /> */}
+      <Home />
     </div>
   );
 }

@@ -3,88 +3,82 @@ import styled from "styled-components";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import { FaPlay } from "react-icons/fa";
 import { GiPauseButton } from "react-icons/gi";
-import { ImgColor, ImgList } from "./ImgInfo";
+import { CatImg, ImgColor } from "./ImgInfo";
 
-function Main() {
-  const [movePx, setMovePx] = useState(0);
-  const [curImageIndex, setCurImageIndex] = useState(0);
-  const [autoPlay, setAutoPlay] = useState(true);
+function Home() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
 
   useEffect(() => {
     let intervalId = null;
-    if (autoPlay) {
-      intervalId = setInterval(handleMoveNext, 2000);
-      intervalId = setInterval(()=>{
-        
-      }, 2000)
+
+    if (isPlaying) {
+      intervalId = setInterval(() => {
+        setCurrentSlide((currentSlide) =>
+          currentSlide === ImgColor.length - 1 ? 0 : currentSlide + 1
+        );
+      }, 2000);
     }
     return () => clearInterval(intervalId);
-  }, [autoPlay, ImgColor.length]);
+  }, [isPlaying, ImgColor.length]);
 
-  const initAutoPlay = () => {
-    handleMoveNext();
+  const handlePrevClick = () => {
+    setCurrentSlide(
+      currentSlide === 0 ? ImgColor.length - 1 : currentSlide - 1
+    );
   };
 
-  const handleMovePrev = () => {
-    if (curImageIndex === 0) {
-      setCurImageIndex(ImgColor.length - 1);
-      setMovePx(-((ImgColor.length - 1) * 500));
-      return;
-    }
-    setCurImageIndex(curImageIndex - 1);
-    setMovePx(-((curImageIndex - 1) * 500));
+  const handleNextClick = () => {
+    setCurrentSlide(
+      currentSlide === ImgColor.length - 1 ? 0 : currentSlide + 1
+    );
   };
 
-  const handleMoveNext = () => {
-    if (curImageIndex === ImgColor.length - 1) {
-      setCurImageIndex(0);
-      setMovePx(0);
-      return;
-    }
-    setCurImageIndex(curImageIndex + 1);
-    setMovePx(-((curImageIndex + 1) * 500));
-  };
-
-  const handleMoveIndicator = (idx) => {};
-
-  const handleAutoPlay = () => {
-    console.log("autoplay");
-    setAutoPlay(!autoPlay);
+  const handlePlayPauseClick = () => {
+    setIsPlaying((isPlaying) => !isPlaying);
   };
 
   return (
     <>
       <SliderWrap>
-        <SliderList movePx={movePx}>
-          {ImgColor.map((el, idx) => (
-            <li key={idx}>
-              <img src={`./img/${el}.jpeg`} />
-            </li>
+        <SliderList>
+          {CatImg.map((image, index) => (
+            <img
+              key={index}
+              src={`./img/${image}.jpg`}
+              alt={`Slide ${index}`}
+              style={{ display: index === currentSlide ? "block" : "none" }}
+            />
           ))}
         </SliderList>
         <ButtonBox>
-          <BtnPrev onClick={handleMovePrev}>
+          <BtnPrev onClick={handlePrevClick}>
             <FiArrowLeft />
           </BtnPrev>
-          <BtnNext onClick={handleMoveNext}>
+          <BtnNext onClick={handleNextClick}>
             <FiArrowRight />
           </BtnNext>
         </ButtonBox>
         <IndicatorBox>
           <ul>
-            {ImgColor.map((el, idx) => (
-              <li key={idx} onClick={() => handleMoveIndicator(idx)}></li>
+            {CatImg.map((el, idx) => (
+              <li
+                key={idx}
+                className={`indicator-dot ${
+                  currentSlide === idx ? "active" : ""
+                }`}
+                onClick={() => setCurrentSlide(idx)}
+              ></li>
             ))}
           </ul>
         </IndicatorBox>
-        <AutoBox onClick={handleAutoPlay}>
-          {autoPlay ? <GiPauseButton /> : <FaPlay />}
+        <AutoBox onClick={handlePlayPauseClick}>
+          {isPlaying ? <GiPauseButton /> : <FaPlay />}
         </AutoBox>
       </SliderWrap>
     </>
   );
 }
-// 버튼을 클릭하면 SliderList의 left값을 -500px씩 이동한다
 const SliderWrap = styled.div`
   width: 500px;
   height: 350px;
@@ -98,7 +92,6 @@ const SliderList = styled.div`
   height: 100%;
   display: flex;
   position: absolute;
-  left: ${(props) => `${props.movePx}px`};
   img {
     width: 500px;
     height: 100%;
@@ -138,6 +131,7 @@ const BtnNext = styled.button`
 `;
 
 const IndicatorBox = styled.div`
+  z-index: 10;
   position: absolute;
   left: 50%;
   bottom: 20px;
@@ -155,7 +149,8 @@ const IndicatorBox = styled.div`
       background-color: white;
       border-radius: 8px;
       opacity: 0.5;
-      :active {
+      /* 클래스명에 대한 style지정 &.클래스명 */
+      &.active {
         opacity: 1;
       }
     }
@@ -167,6 +162,7 @@ const AutoBox = styled.div`
   bottom: 20px;
   color: white;
   cursor: pointer;
+  z-index: 10;
 `;
 
-export default Main;
+export default Home;
