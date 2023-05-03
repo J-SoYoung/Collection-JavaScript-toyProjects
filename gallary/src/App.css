@@ -5,6 +5,23 @@
   justify-content: center;
   align-items: center;
 }
+
+.gallary-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 80px;
+}
+
+.row {
+  flex-direction: row;
+  gap: 100;
+  overflow-x: auto;
+  overflow-y: hidden;
+  justify-content: flex-start;
+}
+
 .text-center {
   text-align: center;
 }
@@ -12,21 +29,34 @@
 .plus-box {
   width: 100px;
   height: 100px;
+  min-width: 100px;
   border: 1px solid black;
   font-size: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
   line-height: 24px;
+  cursor: pointer;
 }
 
-.init-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 80px;
-  cursor: pointer;
+.image-box {
+  width: 200px;
+  height: 200px;
+  /* 화면에 따라 박스 크기가 줄어들어서 고정하고 싶을 때 최소 넓이를 지정해준다 */
+  min-width: 200px;
+  min-height: 200px;
+}
+
+.image-box img {
+  width: 200px;
+  height: 200px;
+  min-width: 200px;
+  min-height: 200px;
+  object-fit: cover;
+}
+
+input {
+  display: none;
 }
 
 @media screen and (max-width: 500px) {
