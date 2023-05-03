@@ -11,31 +11,22 @@ function Home() {
 
   useEffect(() => {
     let intervalId = null;
-
     if (isPlaying) {
       intervalId = setInterval(() => {
         setCurrentSlide((currentSlide) =>
-          currentSlide === ImgColor.length - 1 ? 0 : currentSlide + 1
+          currentSlide === CatImg.length - 1 ? 0 : currentSlide + 1
         );
       }, 2000);
     }
     return () => clearInterval(intervalId);
-  }, [isPlaying, ImgColor.length]);
+  }, [isPlaying, CatImg.length]);
 
   const handlePrevClick = () => {
-    setCurrentSlide(
-      currentSlide === 0 ? ImgColor.length - 1 : currentSlide - 1
-    );
+    setCurrentSlide(currentSlide === 0 ? CatImg.length - 1 : currentSlide - 1);
   };
 
   const handleNextClick = () => {
-    setCurrentSlide(
-      currentSlide === ImgColor.length - 1 ? 0 : currentSlide + 1
-    );
-  };
-
-  const handlePlayPauseClick = () => {
-    setIsPlaying((isPlaying) => !isPlaying);
+    setCurrentSlide(currentSlide === CatImg.length - 1 ? 0 : currentSlide + 1);
   };
 
   return (
@@ -72,7 +63,11 @@ function Home() {
             ))}
           </ul>
         </IndicatorBox>
-        <AutoBox onClick={handlePlayPauseClick}>
+        <AutoBox
+          onClick={() => {
+            setIsPlaying((isPlaying) => !isPlaying);
+          }}
+        >
           {isPlaying ? <GiPauseButton /> : <FaPlay />}
         </AutoBox>
       </SliderWrap>
