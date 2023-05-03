@@ -36,3 +36,10 @@ https://www.notion.so/fun-blog/PJ-4-03a567f49ea142cdaf22d2e124131696 <br>
 - useEffect를 활용하여 렌더링 직후 autoPlay가 되도록 구현합니다. ( + 정리함수 )
 - img슬라이드와 indicator를 img데이터에 따라 동적으로 생성되도록 구현합니다.
 - useState로 currentSlider값을 관리하여 slider의 현재 index를 화면에 띄워줍니다.
+<br>
+
+# gallary
+### [ image-gallary ]
+- 🔎 https://github.com/thdud2262/04-study/tree/master/gallary
+- new FileReader()를 사용해 파일 객체를 만들고 img파일을 추가합니다.
+- react-dropzone 라이브러리를 사용해 사용자가 드래그앤 드롭으로 이미지를 추가할 수 있도록 합니다.
