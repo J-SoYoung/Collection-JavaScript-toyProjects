@@ -39,7 +39,13 @@ https://www.notion.so/fun-blog/PJ-4-03a567f49ea142cdaf22d2e124131696 <br>
 <br>
 
 # gallary
-### [ image-gallary ]
+### [ image-gallary (typescript) ]
 - 🔎 https://github.com/thdud2262/miniPROJECT-01/tree/master/gallary
 - new FileReader()를 사용해 파일 객체를 만들고 img파일을 추가합니다.
 - react-dropzone 라이브러리를 사용해 사용자가 드래그앤 드롭으로 이미지를 추가할 수 있도록 합니다.
+
+### [ mini-album-Project (typescript) ]
+- 🔎 https://github.com/thdud2262/miniPROJECT-01/tree/master/gallary-miniPJ
+- input으로 사용자의 file을 입력받은 후 미리보기를 구현하여 추가 전 이미지를 볼 수 있도록 합니다.
+- image와 text를 같이 입력하여 사진에 대한 짧은 설명도 같이 작성할 수 있도록 합니다.
+- typescript로 이미지와 텍스트를 포함하는 객체의 타입을 정의하였습니다.
