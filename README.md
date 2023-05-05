@@ -39,6 +39,8 @@ https://www.notion.so/fun-blog/PJ-4-03a567f49ea142cdaf22d2e124131696 <br>
 <br>
 
 # gallary
+![image](https://user-images.githubusercontent.com/85012454/236586423-7a816b4b-1409-4d3c-9101-f3c28f02c6c8.png)
+
 ### [ image-gallary (typescript) ]
 - 🔎 https://github.com/thdud2262/miniPROJECT-01/tree/master/gallary
 - new FileReader()를 사용해 파일 객체를 만들고 img파일을 추가합니다.
