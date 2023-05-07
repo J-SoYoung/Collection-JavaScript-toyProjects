@@ -3,9 +3,10 @@
 https://www.notion.so/fun-blog/PJ-4-03a567f49ea142cdaf22d2e124131696 <br>
 <br>
 
-### [ diary ]
+# diary
 - 🔎 https://github.com/thdud2262/04-diary
 - react-hooks을 이용하여 프로젝트를 생성하고 공부합니다.<br>
+<br>
 
 # keyboard
 ![image](https://user-images.githubusercontent.com/85012454/233993113-8010f9ec-94f2-4db7-988f-e94194a39079.png)
@@ -48,6 +49,6 @@ https://www.notion.so/fun-blog/PJ-4-03a567f49ea142cdaf22d2e124131696 <br>
 
 ### [ mini-album-Project (typescript) ]
 - 🔎 https://github.com/thdud2262/miniPROJECT-01/tree/master/gallary-miniPJ
-- input으로 사용자의 file을 입력받은 후 미리보기를 구현하여 추가 전 이미지를 볼 수 있도록 합니다.
-- image와 text를 같이 입력하여 사진에 대한 짧은 설명도 같이 작성할 수 있도록 합니다.
+- 이전 프로젝트에서 한 단계 업그레이드하여 image와 text를 같이 입력하여 사진에 대한 짧은 설명도 같이 작성할 수 있도록 합니다.
+- input으로 사용자의 file을 입력받은 후 미리보기를 구현하여 추가 전 이미지를 볼 수 있도록 합니다
 - typescript로 이미지와 텍스트를 포함하는 객체의 타입을 정의하였습니다.
