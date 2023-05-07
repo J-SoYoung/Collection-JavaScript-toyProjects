@@ -1,5 +1,6 @@
 # miniPJ-gallary
-📕notion : https://www.notion.so/fun-blog/miniPJ-gallay-654b43afeb014c05b8e12f4f294b037b <br>
+📕notion : https://www.notion.so/fun-blog/5-1-02-miniPJ-gallay-2a1dda59fc954b20878110f14456d8a6 <br>
+<br>
 
 ### input type=’file’은 못생겼다. <br>
 - input type=’file’ 태그는 두고, css의 display를 none으로 작성하였다. input의 기능은 살아있지만 화면에는 보이지 않게 설정한 것이다.  그리고 useRef를 통해서 input 태그의 값을 저장해두었다.이를 활용하여 내가 스타일링한 p 태그와 inputRef를 연동 하였다.
