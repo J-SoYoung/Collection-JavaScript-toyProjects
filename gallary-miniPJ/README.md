@@ -1,46 +1,26 @@
-# Getting Started with Create React App
+# miniPJ-gallary
+📕notion : https://www.notion.so/fun-blog/miniPJ-gallay-654b43afeb014c05b8e12f4f294b037b <br>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### input type=’file’은 못생겼다. <br>
+- input type=’file’ 태그는 두고, css의 display를 none으로 작성하였다. input의 기능은 살아있지만 화면에는 보이지 않게 설정한 것이다.  그리고 useRef를 통해서 input 태그의 값을 저장해두었다.이를 활용하여 내가 스타일링한 p 태그와 inputRef를 연동 하였다.
+- ref의 current 프로퍼티는 input을 가리키고 있다. click( ) 메서드는 DOM이벤트의 메서드 중 하나이다. <br>
+  이 메서드를 통해서 inputRef.current 가 참조하는 input을 클릭한 효과를 낼 수 있다.<br>
+![image](https://user-images.githubusercontent.com/85012454/236651210-a1348601-1f7a-48f3-87dc-1497d5aa513d.png)
 
-## Available Scripts
+ ### 사용자가 선택한 file을 미리볼 수 있다.
+- input의 onChange이벤트를 통해 사용자의 file을 확인할 수 있다. 이벤트 객체의 target프로퍼티 안에 files의[0] 번째 내용을 통해 file정보를 확인할 수 있다.
+- new FileReader()로 파일 객체를 생성하여 event로 받은 file정보를 readAsDataURL메서드를 사용해 URL로 바꿀 수 있다. file객체 내부의 result값이 해당 파일의 img-url로 바뀌면 setSelectImage를 reader.result로 업데이트 할 수 있다.
+  ![image](https://user-images.githubusercontent.com/85012454/236651286-ee828ff9-4ea7-49e2-bde6-87e449794a61.png)
 
-In the project directory, you can run:
+### useState로 데이터들을 어떻게 관리했나!?
+- input으로 데이터를 받는 것은 text와 img였다. 각각을 state에 담아서 관리하였다. <br>
+  gallary는 하나의 데이터가 아닌 리스트 형태의 데이터를 보여줄 것이기 때문에<br>
+  viewList라는 state를 만들어 img와 text를 하나의 객체로 묶어서 배열 안에 관리한다. <br>
+- 이때, state의 초기값을 어떻게 설정할 것인지 고민이 되기 시작한다.<br>
+  img와 text는 각각 string이고, 객체로 묶어서 배열 안에 넣어야 한다.
+- interface를 생성하여 string타입의 image와 text를 객체로 묶어서 viewItem으로 정의를 해 놓는다.<br>
+  이후 viewItem을 [ ] 배열로 묶어서 useState의 초기값으로 정의한다.
+  
 
-### `yarn start`
+https://user-images.githubusercontent.com/85012454/236651370-f2d0bafa-1f57-46fd-856b-d8813bfe3d4d.mp4
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
