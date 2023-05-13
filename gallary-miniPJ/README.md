@@ -1,5 +1,5 @@
 # miniPJ-gallary
-📕notion : https://www.notion.so/fun-blog/5-1-02-miniPJ-gallay-2a1dda59fc954b20878110f14456d8a6 <br>
+📕notion : https://www.notion.so/fun-blog/5-1-02-miniPJ-gallay-09a1fec9bd784156a8c9d9b2633d0720 <br>
 <br>
 
 ### input type=’file’은 못생겼다. <br>
