@@ -1,6 +1,6 @@
 # 미니 프로젝트 스터디 폴더입니다
 ### 📕NOTION <br>
-https://www.notion.so/fun-blog/PJ-4-03a567f49ea142cdaf22d2e124131696 <br>
+https://www.notion.so/fun-blog/NOTE-d0f4f3b9f8574aff9738314e04043f7a <br>
 <br>
 
 # diary
@@ -52,3 +52,10 @@ https://www.notion.so/fun-blog/PJ-4-03a567f49ea142cdaf22d2e124131696 <br>
 - 이전 프로젝트에서 한 단계 업그레이드하여 image와 text를 같이 입력하여 사진에 대한 짧은 설명도 같이 작성할 수 있도록 합니다.
 - input으로 사용자의 file을 입력받은 후 미리보기를 구현하여 추가 전 이미지를 볼 수 있도록 합니다
 - typescript로 이미지와 텍스트를 포함하는 객체의 타입을 정의하였습니다.
+<br>
+
+# date-picker
+### [ date-picker (javascript ) ]
+- 🔎 https://github.com/thdud2262/miniPROJECT-01/tree/master/date-picker
+- calendar의 month와 date를 동적으로 생성하고, prev-next버튼을 클릭하여 월을 이동할 수 있다.
+- 사용자가 클릭한 date의 style을 지정할 수 있다.  
