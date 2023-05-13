@@ -1,5 +1,5 @@
 # basic-gallary
-📕notion : https://www.notion.so/fun-blog/5-1-01-basic-gallary-76d59f8d8e6743f2b7c297c6ed8c6882
+📕notion : https://www.notion.so/fun-blog/5-1-01-basic-gallary-ad7db9d4aa204884becbf6b7b68e6755
 ![image](https://user-images.githubusercontent.com/85012454/236651108-363d305c-2794-4870-b213-47034555da93.png)
 
 
