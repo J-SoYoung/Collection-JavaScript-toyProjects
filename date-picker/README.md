@@ -36,3 +36,4 @@ date메서드의 getDay, getDate를 활용해 월별 날짜를 구해 for문을 
 ```bash
 > npm run start
 ```
+![image](https://github.com/thdud2262/miniPROJECT-01/assets/85012454/88299540-0a1d-45bb-8348-9b4d8817f1d0)
