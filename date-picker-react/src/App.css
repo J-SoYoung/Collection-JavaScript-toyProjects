@@ -20,12 +20,12 @@
 h1 {
   color: teal;
 }
-.date-picker {
+.datePicker {
   width: 560px;
   margin: 0 auto;
 }
 
-.date-box {
+.dateBox {
   margin: 30px auto;
   display: flex;
   height: 60px;
@@ -39,7 +39,7 @@ h1 {
   font-size: 28px;
   cursor: pointer;
 }
-.date-input:hover {
+.dateBox:hover {
   background-color: #f3f3f3;
 }
 
@@ -114,7 +114,7 @@ h1 {
 }
 
 /* js로 동적으로 구현할 예정 */
-.calendar .dates .date:nth-child(7n + 0) {
+/* .calendar .dates .date:nth-child(7n + 0) {
   color: blue;
 }
 .calendar .dates .date:nth-child(7n + 1) {
@@ -122,4 +122,4 @@ h1 {
 }
 .calendar .dates .date:first-child {
   grid-column-start: 1;
-}
+} */
