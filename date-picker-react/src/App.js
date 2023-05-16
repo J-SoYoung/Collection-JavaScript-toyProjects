@@ -5,6 +5,7 @@ function App() {
     <div className="App">
       <h1>Date-picker</h1>
       <div className="date-picker">
+        <div className="date-box">2023/05/16</div>
         <div className="calendar">
           <div className="month">
             <button className="prev">&#60;</button>
@@ -21,6 +22,13 @@ function App() {
             <p className="day">SAT</p>
           </div>
           <div className="dates">
+            <p className="date">1</p>
+            <p className="date">2</p>
+            <p className="date">3</p>
+            <p className="date today">4</p>
+            <p className="date">5</p>
+            <p className="date selected">6</p>
+            <p className="date">7</p>
             <p className="date">1</p>
             <p className="date">2</p>
             <p className="date">3</p>
