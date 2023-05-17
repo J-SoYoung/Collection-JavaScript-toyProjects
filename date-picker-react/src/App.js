@@ -11,7 +11,9 @@ function App() {
     month: data.getMonth(),
     date: data.getDate(),
   });
+  const [dateTagList, setDateTagList] = useState();
 
+  // grid => sun = 1, getDay() => sun = 0
   const gridColumnStart = new Date(curDate.year, curDate.month, 1).getDay() + 1;
   const firstGridDateStyle = { gridColumnStart: gridColumnStart };
   // const saturdayStyle = () => {
@@ -30,19 +32,46 @@ function App() {
 
   const numberDate = new Date(curDate.year, curDate.month + 1, 0).getDate();
   const dateTag = [];
-  for (let i = 1; i <= numberDate; i++) {
-    i === 1
-      ? dateTag.push(
-          <p key={1} className="date" style={firstGridDateStyle}>
-            {1}
-          </p>
-        )
-      : dateTag.push(
-          <p key={i} className="date">
-            {i}
-          </p>
-        );
-  }
+  const updateCalendar = () => {
+    for (let i = 1; i <= numberDate; i++) {
+      i === 1
+        ? dateTag.push(
+            <p key={1} className="date" style={firstGridDateStyle}>
+              {1}
+            </p>
+          )
+        : dateTag.push(
+            <p key={i} className="date">
+              {i}
+            </p>
+          );
+    }
+    setDateTagList(dateTag);
+  };
+
+  const movePrevMonth = () => {
+    setCurDate((state) => {
+      const prevMonth = state.month - 1;
+      const prevYear = state.year;
+      if (state.month < 1) {
+        return { ...state, month: 11, year: prevYear - 1 };
+      }
+      return { ...state, month: prevMonth };
+    });
+    updateCalendar();
+  };
+
+  const moveNextMonth = () => {
+    setCurDate((state) => {
+      const nextMonth = state.month + 1;
+      const nextYear = state.year;
+      if (state.month > 10) {
+        return { ...state, month: 0, year: nextYear + 1 };
+      }
+      return { ...state, month: nextMonth };
+    });
+    updateCalendar();
+  };
 
   return (
     <div className="App">
@@ -52,7 +81,7 @@ function App() {
           className="dateBox"
           onClick={() => {
             setShowCalendar(!showCalendar);
-            // saturdayStyle();
+            updateCalendar();
           }}
         >
           {`${curDate.year}년 ${curDate.month + 1}월 ${curDate.date}일`}
@@ -60,9 +89,13 @@ function App() {
         {showCalendar && (
           <div className="calendar">
             <div className="month">
-              <button className="prev">&#60;</button>
-              <div>2023 May</div>
-              <button className="next">&#62;</button>
+              <button className="prev" onClick={movePrevMonth}>
+                &#60;
+              </button>
+              <div>{`${curDate.year}년 ${curDate.month + 1}월`}</div>
+              <button className="next" onClick={moveNextMonth}>
+                &#62;
+              </button>
             </div>
             <div className="days">
               <p className="day">SUN</p>
@@ -74,7 +107,7 @@ function App() {
               <p className="day">SAT</p>
             </div>
             <div className="dates" ref={calendarDatesRef}>
-              {dateTag}
+              {dateTagList}
             </div>
           </div>
         )}
