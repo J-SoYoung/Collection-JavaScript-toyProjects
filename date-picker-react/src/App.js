@@ -1,9 +1,8 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 
 function App() {
   const [showCalendar, setShowCalendar] = useState(false);
-  const calendarDatesRef = useRef(null);
   // new Date()의 년,월,일을 curDate에 저장해서 사용할거다.
   const data = new Date();
   const [curDate, setCurDate] = useState({
@@ -11,28 +10,18 @@ function App() {
     month: data.getMonth(),
     date: data.getDate(),
   });
-  const [dateTagList, setDateTagList] = useState();
 
-  // grid => sun = 1, getDay() => sun = 0
+  useEffect(() => {
+    updateCalendar();
+  }, [curDate]);
+
+  const [dateTagList, setDateTagList] = useState();
   const gridColumnStart = new Date(curDate.year, curDate.month, 1).getDay() + 1;
   const firstGridDateStyle = { gridColumnStart: gridColumnStart };
-  // const saturdayStyle = () => {
-  //   const calendarDatesEl = calendarDatesRef.current;
-  //   console.log(calendarDatesEl);
-  //   const saturdayEls = calendarDatesEl?.querySelectorAll(
-  //     `.date:nth-child(7n+${7 - new Date().getDay()})`
-  //   );
-
-  //   for (let i = 0; i < saturdayEls?.length; i++) {
-  //     saturdayEls[i].style.color = "blue";
-  //   }
-  // };
-
-  // const sundayStyle = () => {};
 
   const numberDate = new Date(curDate.year, curDate.month + 1, 0).getDate();
-  const dateTag = [];
   const updateCalendar = () => {
+    const dateTag = [];
     for (let i = 1; i <= numberDate; i++) {
       i === 1
         ? dateTag.push(
@@ -49,6 +38,10 @@ function App() {
     setDateTagList(dateTag);
   };
 
+  console.log("gridColumnStart-", gridColumnStart);
+  console.log("numberDate-", numberDate);
+  console.log(curDate);
+
   const movePrevMonth = () => {
     setCurDate((state) => {
       const prevMonth = state.month - 1;
@@ -58,7 +51,6 @@ function App() {
       }
       return { ...state, month: prevMonth };
     });
-    updateCalendar();
   };
 
   const moveNextMonth = () => {
@@ -70,7 +62,6 @@ function App() {
       }
       return { ...state, month: nextMonth };
     });
-    updateCalendar();
   };
 
   return (
@@ -106,9 +97,7 @@ function App() {
               <p className="day">FRI</p>
               <p className="day">SAT</p>
             </div>
-            <div className="dates" ref={calendarDatesRef}>
-              {dateTagList}
-            </div>
+            <div className="dates">{dateTagList}</div>
           </div>
         )}
       </div>
