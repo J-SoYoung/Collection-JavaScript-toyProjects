@@ -1,11 +1,8 @@
 # 미니 프로젝트 스터디 폴더입니다
-### 📕NOTION <br>
+### 📕NOTION <br> 
 https://www.notion.so/fun-blog/NOTE-d0f4f3b9f8574aff9738314e04043f7a <br>
-<br>
-
-# diary
-- 🔎 https://github.com/thdud2262/04-diary
-- react-hooks을 이용하여 프로젝트를 생성하고 공부합니다.<br>
+이번 미니프로젝트 시리즈에서는 **코딩력을 높이기 위해**, 강의를 들으며 자바스크립트의 다양한 활용법에 대해 공부했습니다.<br> 
+이후 **같은 주제로 리액트나 타입스크립트로 업그레이드**하여 다시 한번 개발해보는 시간을 가졌습니다.<br>
 <br>
 
 # keyboard
