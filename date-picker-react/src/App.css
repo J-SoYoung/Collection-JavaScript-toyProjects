@@ -85,6 +85,12 @@ h1 {
   justify-content: center;
   align-items: center;
 }
+.days .sun {
+  color: red;
+}
+.days .sat {
+  color: blue;
+}
 .calendar .dates {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
