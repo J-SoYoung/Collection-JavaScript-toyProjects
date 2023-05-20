@@ -11,36 +11,60 @@ function App() {
     date: data.getDate(),
   });
 
+  // 콘솔 출력이 2번되는 이유눈 렌더링 (1), curDate-update되서 렌더링(2)
+  // 이부분.음 뭔가 처리해줘야할듯
+  // 렌더링이 2번되니까, 1번은 color안된거 2번재는 color바뀐거 . 첫번재꺼 안보여줄 순 없?
   useEffect(() => {
     updateCalendar();
   }, [curDate]);
 
-  const [dateTagList, setDateTagList] = useState();
-  const gridColumnStart = new Date(curDate.year, curDate.month, 1).getDay() + 1;
-  const firstGridDateStyle = { gridColumnStart: gridColumnStart };
+  const isSunday = (year, month, day) => {
+    return new Date(year, month, day).getDay() === 0;
+  };
 
-  const numberDate = new Date(curDate.year, curDate.month + 1, 0).getDate();
+  const isSaturday = (year, month, day) => {
+    return new Date(year, month, day).getDay() === 6;
+  };
+
+  // 달력 생성
   const updateCalendar = () => {
-    const dateTag = [];
+    const calendarList = [];
+    const numberDate = new Date(curDate.year, curDate.month + 1, 0).getDate();
+
+    // month 1일의 시작 grid-style
+    const gridColumnStart =
+      new Date(curDate.year, curDate.month, 1).getDay() + 1;
+    const firstGridDateStyle = { gridColumnStart: gridColumnStart };
+
     for (let i = 1; i <= numberDate; i++) {
+      // 토, 일요일 color
+      let cellStyle = {};
+      if (isSunday(curDate.year, curDate.month, i)) {
+        cellStyle.color = "red";
+      }
+
+      if (isSaturday(curDate.year, curDate.month, i)) {
+        cellStyle.color = "blue";
+      }
+
       i === 1
-        ? dateTag.push(
-            <p key={1} className="date" style={firstGridDateStyle}>
+        ? calendarList.push(
+            <p
+              key={1}
+              className="date"
+              style={{ ...firstGridDateStyle, ...cellStyle }}
+            >
               {1}
             </p>
           )
-        : dateTag.push(
-            <p key={i} className="date">
+        : calendarList.push(
+            <p key={i} className="date" style={cellStyle}>
               {i}
             </p>
           );
     }
-    setDateTagList(dateTag);
+    return calendarList;
   };
-
-  console.log("gridColumnStart-", gridColumnStart);
-  console.log("numberDate-", numberDate);
-  console.log(curDate);
 
   const movePrevMonth = () => {
     setCurDate((state) => {
@@ -72,7 +96,7 @@ function App() {
           className="dateBox"
           onClick={() => {
             setShowCalendar(!showCalendar);
-            updateCalendar();
+            // updateCalendar();
           }}
         >
           {`${curDate.year}년 ${curDate.month + 1}월 ${curDate.date}일`}
@@ -89,15 +113,15 @@ function App() {
               </button>
             </div>
             <div className="days">
-              <p className="day">SUN</p>
+              <p className="day sun">SUN</p>
               <p className="day">MON</p>
               <p className="day">TUE</p>
               <p className="day">WED</p>
               <p className="day">THU</p>
               <p className="day">FRI</p>
-              <p className="day">SAT</p>
+              <p className="day sat">SAT</p>
             </div>
-            <div className="dates">{dateTagList}</div>
+            <div className="dates">{updateCalendar()}</div>
           </div>
         )}
       </div>
