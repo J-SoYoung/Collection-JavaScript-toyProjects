@@ -3,6 +3,8 @@ import "./App.css";
 
 function App() {
   const [showCalendar, setShowCalendar] = useState(false);
+  const curCalendarRef = useRef();
+
   // new Date()의 년,월,일을 curDate에 저장해서 사용할거다.
   const data = new Date();
   const [curDate, setCurDate] = useState({
@@ -10,7 +12,7 @@ function App() {
     month: data.getMonth(),
     date: data.getDate(),
   });
-
+  const [selectDate, setSelectDate] = useState();
   // 콘솔 출력이 2번되는 이유눈 렌더링 (1), curDate-update되서 렌더링(2)
   // 이부분.음 뭔가 처리해줘야할듯
   // 렌더링이 2번되니까, 1번은 color안된거 2번재는 color바뀐거 . 첫번재꺼 안보여줄 순 없?
@@ -24,6 +26,10 @@ function App() {
 
   const isSaturday = (year, month, day) => {
     return new Date(year, month, day).getDay() === 6;
+  };
+
+  const handleSelectDate = (date) => {
+    setSelectDate({ ...curDate, date });
   };
 
   // 달력 생성
@@ -47,18 +53,40 @@ function App() {
         cellStyle.color = "blue";
       }
 
+      // 오늘 날짜에 배경색 ++
+      if (
+        i === curDate.date &&
+        curDate.month === data.getMonth() &&
+        curDate.year === data.getFullYear()
+      ) {
+        cellStyle.background = "#eee";
+        cellStyle.borderRadius = "8px";
+      }
+
+      // 클릭한 날짜에 배경색 ++
+      if (i === selectDate?.date) {
+        console.log(i);
+        cellStyle.background = "#eee";
+      }
+
       i === 1
         ? calendarList.push(
             <p
               key={1}
               className="date"
               style={{ ...firstGridDateStyle, ...cellStyle }}
+              onClick={() => handleSelectDate(1)}
             >
               {1}
             </p>
           )
         : calendarList.push(
-            <p key={i} className="date" style={cellStyle}>
+            <p
+              key={i}
+              className="date"
+              style={cellStyle}
+              onClick={() => handleSelectDate(i)}
+            >
               {i}
             </p>
           );
@@ -96,10 +124,13 @@ function App() {
           className="dateBox"
           onClick={() => {
             setShowCalendar(!showCalendar);
-            // updateCalendar();
           }}
         >
-          {`${curDate.year}년 ${curDate.month + 1}월 ${curDate.date}일`}
+          {selectDate
+            ? `${selectDate.year}년 ${selectDate.month + 1}월 ${
+                selectDate.date
+              }일`
+            : `${curDate.year}년 ${curDate.month + 1}월 ${curDate.date}일`}
         </div>
         {showCalendar && (
           <div className="calendar">
