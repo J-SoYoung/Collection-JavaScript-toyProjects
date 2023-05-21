@@ -53,7 +53,14 @@ https://www.notion.so/fun-blog/NOTE-d0f4f3b9f8574aff9738314e04043f7a <br>
 <br>
 
 # date-picker
+![image](https://github.com/thdud2262/miniPROJECT-01/assets/85012454/45bec232-ed5b-4d93-a296-80bb49e68187)
+
 ### [ date-picker (javascript ) ]
 - 🔎 https://github.com/thdud2262/miniPROJECT-01/tree/master/date-picker
 - calendar의 month와 date를 동적으로 생성하고, prev-next버튼을 클릭하여 월을 이동할 수 있다.
 - 사용자가 클릭한 date의 style을 지정할 수 있다.  
+
+### [ date-picker (react) ]
+- 🔎 https://github.com/thdud2262/miniPROJECT-01/tree/master/date-picker-react
+- 자바스크립트로 calendar를 구현하였던 것을 react를 사용해 구현하였다. 
+- react-hooks인 useState, useEffec를 활용하여 조건에 맞는 style과 함께 date태그를 동적으로 생성하였다.
