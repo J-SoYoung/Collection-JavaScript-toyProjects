@@ -1,0 +1,9 @@
+{
+  // 파일 저장 시 자동으로 코드를 포맷팅합니다
+  "editor.formatOnSave": true,
+
+  // 파일 저장 시 eslint가 해결할 수 있는 문제에 한하여 자동으로 문제를 해결합니다.
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}
