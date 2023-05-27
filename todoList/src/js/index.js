@@ -21,7 +21,44 @@ class TodoList {
   addEvent() {
     this.addBtnEl.addEventListener("click", this.onClickAddBtn.bind(this));
     this.todoListEl.addEventListener("click", this.onClickTodoList.bind(this));
+    this.addRadioBtnEvent();
   }
+
+  addRadioBtnEvent() {
+    for (const filterRadioBtnEl of this.filterRadioBtnEls) {
+      filterRadioBtnEl.addEventListener(
+        "click",
+        this.onClickRadioBtn.bind(this),
+      );
+    }
+  }
+
+  onClickRadioBtn(event) {
+    const { value } = event.target;
+    this.filterTodo(value);
+  }
+
+  filterTodo(status) {
+    const todoDivEls = this.todoListEl.querySelectorAll("div.todo");
+    for (const todoDivEl of todoDivEls) {
+      switch (status) {
+        case "ALL":
+          todoDivEl.style.display = "flex";
+          break;
+        case "DONE":
+          todoDivEl.style.display = todoDivEl.classList.contains("done")
+            ? "flex"
+            : "none";
+          break;
+        case "TODO":
+          todoDivEl.style.display = todoDivEl.classList.contains("done")
+            ? "none"
+            : "flex";
+          break;
+      }
+    }
+  }
+
   onClickTodoList(event) {
     const { target } = event;
     const btn = target.closest("button");
