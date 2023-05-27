@@ -13,10 +13,59 @@ class TodoList {
     this.addBtnEl = this.inputAreaEl.querySelector("#add-btn");
     this.todoContainerEl = document.getElementById("todo-container");
     this.todoListEl = this.todoContainerEl.querySelector("#todo-list");
+    this.radioAreaEl = this.inputContainerEl.querySelector("#radio-area");
+    this.filterRadioBtnEls = this.radioAreaEl.querySelectorAll(
+      "input[name='filter']",
+    );
   }
   addEvent() {
     this.addBtnEl.addEventListener("click", this.onClickAddBtn.bind(this));
+    this.todoListEl.addEventListener("click", this.onClickTodoList.bind(this));
   }
+  onClickTodoList(event) {
+    const { target } = event;
+    const btn = target.closest("button");
+    if (btn === null) return;
+    if (btn.matches("#delete-btn")) {
+      // matches: 주어진 CSS선택자와 요소가 일치하는지 확인
+      this.deleteTodo(target);
+    } else if (btn.matches("#edit-btn")) {
+      this.editTodo(target);
+    } else if (btn.matches("#save-btn")) {
+      this.saveTodo(target);
+    } else if (btn.matches("#complete-btn")) {
+      this.completeTodo(target);
+    }
+  }
+  completeTodo(target) {
+    // closest: 요소에 가장 근접한 <div class='todo'></div>조상요소를 찾아 반환하는 역할
+    const todoDiv = target.closest(".todo");
+    todoDiv.classList.toggle("done");
+  }
+
+  saveTodo(target) {
+    const todoDiv = target.closest(".todo");
+    todoDiv.classList.remove("edit");
+    const todoInputEl = todoDiv.querySelector("input");
+    todoInputEl.readOnly = true;
+  }
+
+  editTodo(target) {
+    const todoDiv = target.closest(".todo");
+    const todoinputEl = todoDiv.querySelector("input");
+    todoinputEl.readOnly = false;
+    todoinputEl.focus();
+    todoDiv.classList.add("edit");
+  }
+  deleteTodo(target) {
+    const todoDiv = target.closest(".todo");
+    // css로 구조를 지워줄 뿐 아니라 DOM에서도 제거
+    todoDiv.addEventListener("transitionend", () => {
+      todoDiv.remove();
+    });
+    todoDiv.classList.add("delete");
+  }
+
   onClickAddBtn() {
     if (this.todoInputEl.value.length === 0) {
       alert("내용을 입력해주세요");
@@ -67,5 +116,5 @@ class TodoList {
 
 // DOM이 load됐을 때 클래스 인스턴스 생성
 document.addEventListener("DOMContentLoaded", () => {
-  const todoList = new TodoList();
+  new TodoList();
 });
