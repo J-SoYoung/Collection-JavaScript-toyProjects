@@ -1,6 +1,42 @@
 import "@fortawesome/fontawesome-free/js/all.min.js";
 import "../scss/style.scss";
 
+class Router {
+  routes = [];
+  notFoundCallback = () => {};
+
+  addRoute(url, callback) {
+    this.routes.push({
+      url,
+      callback,
+    });
+    return this;
+  }
+
+  checkRoute() {
+    const currentRoute = this.routes.find(
+      (route) => route.url === window.location.hash,
+    );
+    if (!currentRoute) {
+      this.notFoundCallback();
+      return;
+    }
+    currentRoute.callback();
+  }
+  setNotFound(callback) {
+    this.notFoundCallback = callback;
+    return this;
+  }
+
+  init() {
+    window.addEventListener("hashchange", this.checkRoute.bind(this));
+    if (!window.location.hash) {
+      window.location.hash = "#/";
+    }
+    this.checkRoute();
+  }
+}
+
 class TodoList {
   constructor() {
     this.assignElement();
@@ -35,7 +71,8 @@ class TodoList {
 
   onClickRadioBtn(event) {
     const { value } = event.target;
-    this.filterTodo(value);
+    // this.filterTodo(value);
+    window.location.href = `#/${value.toLowerCase()}`;
   }
 
   filterTodo(status) {
@@ -153,5 +190,20 @@ class TodoList {
 
 // DOM이 load됐을 때 클래스 인스턴스 생성
 document.addEventListener("DOMContentLoaded", () => {
-  new TodoList();
+  const router = new Router();
+  const todoList = new TodoList();
+  const routeCallback = (status) => () => {
+    todoList.filterTodo(status);
+    document.querySelector(
+      `input[type='radio'][value='${status}']`,
+    ).checked = true;
+  };
+  // routeCallback에서 status를 가진 채로 함수를 인자로 받으려면 위에서 status를 받은 함수 자체를 return시켜야 한다
+  // router체이닝을 가능하게 한다
+  router
+    .addRoute("#/all", routeCallback("ALL"))
+    .addRoute("#/todo", routeCallback("TODO"))
+    .addRoute("#/done", routeCallback("DONE"))
+    .setNotFound(routeCallback("ALL"))
+    .init();
 });

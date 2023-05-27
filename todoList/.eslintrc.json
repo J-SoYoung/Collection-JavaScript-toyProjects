@@ -13,7 +13,8 @@
       "error",
       {
         "endOfLine": "auto",
-        "parser": "flow"
+        "parser": "flow",
+        "usePrettierrc": false
       }
     ]
   }
