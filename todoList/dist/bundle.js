@@ -65,11 +65,49 @@ class Router {
   }
 }
 
+class Storage {
+  getTodos() {
+    return localStorage.getItem("todos") === null
+      ? []
+      : JSON.parse(localStorage.getItem("todos"));
+  }
+  saveTodo(id, todoContent) {
+    const todosData = this.getTodos();
+    todosData.push({ id, content: todoContent, status: "TODO" });
+    localStorage.setItem("todos", JSON.stringify(todosData));
+  }
+  editTodo(id, todoContent, status = "TODO") {
+    const todosData = this.getTodos();
+    const todoIndex = todosData.findIndex((todo) => todo.id == id);
+    const targetTodoData = todosData[todoIndex];
+    const editedTodoData =
+      todoContent === ""
+        ? { ...targetTodoData, status }
+        : { ...targetTodoData, content: todoContent };
+    todosData.splice(todoIndex, 1, editedTodoData);
+    localStorage.setItem("todos", JSON.stringify(todosData));
+  }
+  deleteTodo(id) {
+    const todosData = this.getTodos();
+    todosData.splice(
+      todosData.findIndex((todo) => todo.id == id),
+      1,
+    );
+    localStorage.setItem("todos", JSON.stringify(todosData));
+  }
+}
+
 class TodoList {
-  constructor() {
+  constructor(storage) {
     this.assignElement();
     this.addEvent();
+    this.initStorage(storage);
+    this.loadSaveData();
   }
+  initStorage(storage) {
+    this.storage = storage;
+  }
+
   assignElement() {
     this.inputContainerEl = document.getElementById("input-container");
     this.inputAreaEl = this.inputContainerEl.querySelector("#input-area");
@@ -88,6 +126,14 @@ class TodoList {
     this.addRadioBtnEvent();
   }
 
+  loadSaveData() {
+    const todosData = this.storage.getTodos();
+    for (const todoData of todosData) {
+      const { id, content, status } = todoData;
+      console.log(id, content, status);
+      this.createTodoElement(id, content, status);
+    }
+  }
   addRadioBtnEvent() {
     for (const filterRadioBtnEl of this.filterRadioBtnEls) {
       filterRadioBtnEl.addEventListener(
@@ -143,6 +189,13 @@ class TodoList {
     // closest: 요소에 가장 근접한 <div class='todo'></div>조상요소를 찾아 반환하는 역할
     const todoDiv = target.closest(".todo");
     todoDiv.classList.toggle("done");
+
+    const { id } = todoDiv.dataset;
+    this.storage.editTodo(
+      id,
+      "",
+      todoDiv.classList.contains("done") ? "DONE" : "TODO",
+    );
   }
 
   saveTodo(target) {
@@ -150,6 +203,9 @@ class TodoList {
     todoDiv.classList.remove("edit");
     const todoInputEl = todoDiv.querySelector("input");
     todoInputEl.readOnly = true;
+
+    const { id } = todoDiv.dataset;
+    this.storage.editTodo(id, todoInputEl.value);
   }
 
   editTodo(target) {
@@ -166,6 +222,7 @@ class TodoList {
       todoDiv.remove();
     });
     todoDiv.classList.add("delete");
+    this.storage.deleteTodo(todoDiv.dataset.id);
   }
 
   onClickAddBtn() {
@@ -173,13 +230,19 @@ class TodoList {
       alert("내용을 입력해주세요");
       return;
     }
-    this.createTodoElement(this.todoInputEl.value);
+    const id = Date.now();
+    this.storage.saveTodo(id, this.todoInputEl.value);
+    this.createTodoElement(id, this.todoInputEl.value);
   }
 
-  createTodoElement(value) {
+  createTodoElement(id, value, status = null) {
+    console.log(id, value, status);
     const todoDiv = document.createElement("div");
     todoDiv.classList.add("todo");
-
+    if (status === "DONE") {
+      todoDiv.classList.add("done");
+    }
+    todoDiv.dataset.id = id;
     const todoContent = document.createElement("input");
     todoContent.value = value;
     todoContent.readOnly = true;
@@ -219,11 +282,11 @@ class TodoList {
 // DOM이 load됐을 때 클래스 인스턴스 생성
 document.addEventListener("DOMContentLoaded", () => {
   const router = new Router();
-  const todoList = new TodoList();
+  const todoList = new TodoList(new Storage());
   const routeCallback = (status) => () => {
     todoList.filterTodo(status);
     document.querySelector(
-      `input[type='radio'][value='${status}']`,
+      `input[type="radio"][value="${status}"]`,
     ).checked = true;
   };
   // routeCallback에서 status를 가진 채로 함수를 인자로 받으려면 위에서 status를 받은 함수 자체를 return시켜야 한다
