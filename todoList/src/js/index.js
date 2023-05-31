@@ -102,7 +102,6 @@ class TodoList {
     const todosData = this.storage.getTodos();
     for (const todoData of todosData) {
       const { id, content, status } = todoData;
-      console.log(id, content, status);
       this.createTodoElement(id, content, status);
     }
   }
@@ -208,7 +207,6 @@ class TodoList {
   }
 
   createTodoElement(id, value, status = null) {
-    console.log(id, value, status);
     const todoDiv = document.createElement("div");
     todoDiv.classList.add("todo");
     if (status === "DONE") {

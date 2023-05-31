@@ -1,12 +1,29 @@
+@font-face {
+  font-family: "TheJamsil5Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "TheJamsil5Bold";
 }
 
 body {
-  background-color: skyblue;
-  color: white;
+  width: 640px;
+  height: 100vh;
+  margin: 30px auto;
+  padding: 10px;
+  box-sizing: border-box;
+  color: teal;
+  background-color: #eee;
+  border: 1px solid teal;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px lightgray;
 }
 
 header {
@@ -47,7 +64,7 @@ header {
       border: none;
       background: white;
       color: white;
-      background: green;
+      background: teal;
       cursor: pointer;
     }
   }
@@ -74,7 +91,7 @@ header {
       // !
       transition: 1s ease;
 
-      .todo-item { 
+      .todo-item {
         // 부모의 width를 차지한다
         flex-grow: 1;
         border: none;
@@ -104,7 +121,7 @@ header {
       }
 
       .delete-btn {
-        background: red;
+        background: rgb(250, 76, 76);
         color: white;
         border: none;
         padding: 1rem;
@@ -113,7 +130,7 @@ header {
       }
 
       .complete-btn {
-        background: blue;
+        background: teal;
         color: white;
         border: none;
         padding: 1rem;
@@ -122,7 +139,7 @@ header {
       }
 
       .edit-btn {
-        background: black;
+        background: darkgray;
         color: white;
         border: none;
         padding: 1rem;
@@ -181,9 +198,9 @@ header {
     }
 
     &:checked + label {
-      background-color: #b700ff;
+      background-color: teal;
       color: #fff;
-      border-color: #b700ff;
+      border-color: teal;
     }
   }
 }
