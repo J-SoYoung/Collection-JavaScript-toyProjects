@@ -64,3 +64,11 @@ https://www.notion.so/fun-blog/NOTE-d0f4f3b9f8574aff9738314e04043f7a <br>
 - 🔎 https://github.com/thdud2262/miniPROJECT-01/tree/master/date-picker-react
 - 자바스크립트로 calendar를 구현하였던 것을 react를 사용해 구현하였다. 
 - react-hooks인 useState, useEffec를 활용하여 조건에 맞는 style과 함께 date태그를 동적으로 생성하였다.
+<br>
+
+# TODOLIST
+### [ Todolist (javascript) ]
+- 🔎https://github.com/thdud2262/miniPROJECT-01-React-JS/tree/master/todoList
+- TodoList의 완료여부(DONE/TODO/ALL)에 따라 라우터를 구현하였다.
+- localStorage를 활용하여 사용자의 Todo-data를 저장할 수 있게 하였다.
+- TODOLIST의 CRUD를 구현하였다.
