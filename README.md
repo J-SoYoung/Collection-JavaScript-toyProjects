@@ -67,8 +67,11 @@ https://www.notion.so/fun-blog/NOTE-d0f4f3b9f8574aff9738314e04043f7a <br>
 <br>
 
 # TODOLIST
+![image](https://github.com/thdud2262/miniPROJECT-01-React-JS/assets/85012454/8cd1f7ca-680d-4924-908f-e17985e0219d)
+
+
 ### [ Todolist (javascript) ]
 - 🔎https://github.com/thdud2262/miniPROJECT-01-React-JS/tree/master/todoList
+- TODOLIST의 CRUD를 구현하였다.
 - TodoList의 완료여부(DONE/TODO/ALL)에 따라 라우터를 구현하였다.
 - localStorage를 활용하여 사용자의 Todo-data를 저장할 수 있게 하였다.
-- TODOLIST의 CRUD를 구현하였다.
