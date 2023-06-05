@@ -11,8 +11,8 @@ li {
 .sortable-list .item {
   width: 300px;
   height: 80px;
-  margin-bottom: 10px;
-  border-top: 2px solid transparent;
+  margin: 20px;
+  border-top: 5px solid transparent;
 }
 
 .sortable-list .item * {
@@ -25,5 +25,5 @@ li {
 }
 
 .sortable-list .item.dragover {
-  border-top-color: green;
+  border-top-color: teal;
 }
