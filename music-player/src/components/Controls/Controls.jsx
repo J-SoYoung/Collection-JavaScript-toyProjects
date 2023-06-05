@@ -20,14 +20,11 @@ const Controls = ({
   setVolume,
 }) => {
   const playing = useSelector((state) => state.musicPlayer.playing);
-  // console.log(playing);
 
   const onClickPlay = () => {
-    console.log("play");
     play();
   };
   const onClickPause = () => {
-    console.log("pause");
     pause();
   };
   return (
