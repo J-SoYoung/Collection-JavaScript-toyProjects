@@ -1,4 +1,9 @@
-import React, { useImperativeHandle, useRef, forwardRef } from "react";
+import React, {
+  useImperativeHandle,
+  useRef,
+  forwardRef,
+  useState,
+} from "react";
 import "./ProgressArea.scss";
 import { useDispatch } from "react-redux";
 import music1 from "../../music/music-1.mp3";
@@ -8,7 +13,11 @@ function ProgressArea(props, ref) {
   // ref: audio메서드가 참조된 ref
   // console.log(ref);
   const audio = useRef();
+  const progressBar = useRef();
   const dispatch = useDispatch();
+
+  const [currentTime, setCurrentTime] = useState("00:00");
+  const [duration, setDuration] = useState("00:00");
 
   // useImperativeHandle은 ref를 사용하여 자식 컴포넌트의
   // 특정 메서드/속성을 부모 컴포넌트로 노출시키는 데 사용된다.
@@ -19,29 +28,57 @@ function ProgressArea(props, ref) {
     pause: () => {
       audio.current.pause();
     },
+    changeVolume: (volume) => {
+      audio.current.volume = volume;
+    },
   }));
 
   const onPlay = () => {
     dispatch(playMusic());
   };
+
   const onPause = () => {
     dispatch(stopMusic());
   };
 
+  const getTime = (time) => {
+    const minute = `0${parseInt(time / 60, 10)}`;
+    const seconds = `0${parseInt(time % 60)}`;
+    return `${minute}:${seconds.slice(-2)}`;
+  };
+
+  const onTimeUpdate = (e) => {
+    if (e.target.readyState === 0) return;
+    const currentTime = e.target.currentTime;
+    const duration = e.target.duration;
+    const progressBarWidth = (currentTime / duration) * 100;
+    progressBar.current.style.width = `${progressBarWidth}%`;
+    setCurrentTime(getTime(currentTime));
+    setDuration(getTime(duration));
+  };
+  // (전체위치 / 찍힌 지점의 위치) * duration
+  const onClickProgress = (e) => {
+    const progressBarWidth = e.currentTarget.clientWidth;
+    const offset = e.nativeEvent.offsetX;
+    const duration = audio.current.duration;
+    audio.current.currentTime = (offset / progressBarWidth) * duration;
+  };
+
   return (
-    <div className="progress-area">
-      <div className="progress-bar">
+    <div className="progress-area" onMouseDown={onClickProgress}>
+      <div className="progress-bar" ref={progressBar}>
         <audio
           autoPlay
           ref={audio}
           src={music1}
           onPlay={onPlay}
           onPause={onPause}
+          onTimeUpdate={onTimeUpdate}
         ></audio>
       </div>
       <div className="music-timer">
-        <span>00:00</span>
-        <span>00:00</span>
+        <span>{currentTime}</span>
+        <span>{duration}</span>
       </div>
     </div>
   );

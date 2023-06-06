@@ -17,7 +17,7 @@ const Controls = ({
   resetDuration,
   play,
   pause,
-  setVolume,
+  changeVolume,
 }) => {
   const playing = useSelector((state) => state.musicPlayer.playing);
 
@@ -27,6 +27,11 @@ const Controls = ({
   const onClickPause = () => {
     pause();
   };
+
+  const onChangeVolume = (e) => {
+    changeVolume(e.target.value);
+  };
+
   return (
     <div className="control-area">
       <QueueMusic sx={{ fontSize: 30, cursor: "pointer" }} />
@@ -51,6 +56,7 @@ const Controls = ({
           type="range"
           style={{ cursor: "pointer" }}
           defaultValue={1}
+          onChange={onChangeVolume}
           min="0"
           max="1"
           step="0.1"
