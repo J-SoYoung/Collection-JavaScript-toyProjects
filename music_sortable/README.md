@@ -7,11 +7,11 @@
 
 ```bash
 // 첫 배포
-> npm publish --access public
+> npm run publish --access public
 
 // 파일 수정 후 배포
 // 이때, package.json의 버전도 같이 업그레이드 해 줘야 한다.
-> npm publish
+> npm run publish
 ```
 
 ## lib install-test
