@@ -9,7 +9,8 @@ import QueueMusic from "@mui/icons-material/QueueMusic";
 import ShuffleIcon from "@mui/icons-material/Shuffle";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import "./Controls.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { prevMusic, nextMusic } from "../../store/musicPlayerSlice";
 
 const Controls = ({
   showMusicList,
@@ -19,6 +20,7 @@ const Controls = ({
   pause,
   changeVolume,
 }) => {
+  const dispatch = useDispatch();
   const playing = useSelector((state) => state.musicPlayer.playing);
 
   const onClickPlay = () => {
@@ -31,12 +33,21 @@ const Controls = ({
   const onChangeVolume = (e) => {
     changeVolume(e.target.value);
   };
+  const onClickSkipPrev = () => {
+    dispatch(prevMusic());
+  };
+  const onClickSkipNext = () => {
+    dispatch(nextMusic());
+  };
 
   return (
     <div className="control-area">
       <QueueMusic sx={{ fontSize: 30, cursor: "pointer" }} />
       <RepeatIcon sx={{ fontSize: 30, cursor: "pointer" }} />
-      <SkipPrevious sx={{ fontSize: 30, cursor: "pointer" }} />
+      <SkipPrevious
+        sx={{ fontSize: 30, cursor: "pointer" }}
+        onClick={onClickSkipPrev}
+      />
       {playing ? (
         <PauseIcon
           sx={{ fontSize: 30, cursor: "pointer" }}
@@ -49,7 +60,10 @@ const Controls = ({
           onClick={onClickPlay}
         />
       )}
-      <SkipNext sx={{ fontSize: 30, cursor: "pointer" }} />
+      <SkipNext
+        sx={{ fontSize: 30, cursor: "pointer" }}
+        onClick={onClickSkipNext}
+      />
       <div className="volume-container">
         <VolumeUpIcon sx={{ fontSize: 20 }} />
         <input
