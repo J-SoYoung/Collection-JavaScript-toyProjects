@@ -51,7 +51,7 @@ const playList = [
 const initialState = {
   playList,
   currentMusicId: playList[0].id,
-  currentindex: 0,
+  currentIndex: 0,
   playing: false,
   repeat: "ALL", // ONE SHUFFLE
 };
@@ -67,8 +67,30 @@ const musicPlayerSlice = createSlice({
     stopMusic: (state, action) => {
       return { ...state, playing: false };
     },
+    nextMusic: (state, action) => {
+      // % 연산자는 정수만 반환한다.
+      // 마지막 index의 음악이 끝난 경우, if문을 사용하지 않아도 index가 0결과값이 된다
+      // => 처음으로 돌아간다
+      const nextIndex = (state.currentIndex + 1) % state.playList.length;
+      return {
+        ...state,
+        currentIndex: nextIndex,
+        currentMusicId: state.playList[nextIndex].id,
+      };
+    },
+    prevMusic: (state, action) => {
+      // 0에서 이전곡으로 가면 마지막 음원이 나와야 하므로 4가 되어야 한다
+      const prevIndex =
+        (state.currentIndex - 1 + state.playList.length) %
+        state.playList.length;
+      return {
+        ...state,
+        currentIndex: prevIndex,
+        currentMusicId: state.playList[prevIndex].id,
+      };
+    },
   },
 });
 
-export const { playMusic, stopMusic } = musicPlayerSlice.actions;
+export const { playMusic, stopMusic, nextMusic, prevMusic } = musicPlayerSlice.actions;
 export default musicPlayerSlice.reducer;
