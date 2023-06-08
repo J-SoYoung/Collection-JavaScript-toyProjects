@@ -16,7 +16,7 @@ function ProgressArea(props, ref) {
 
   // dispatch, useSelector
   const dispatch = useDispatch();
-  const {playList,currentIndex } = useSelector((state) => state.musicPlayer);
+  const { playList, currentIndex } = useSelector((state) => state.musicPlayer);
 
   const [currentTime, setCurrentTime] = useState("00:00");
   const [duration, setDuration] = useState("00:00");
@@ -43,9 +43,9 @@ function ProgressArea(props, ref) {
     dispatch(stopMusic());
   };
 
-  const onEnded = () =>{
-    dispatch(nextMusic())
-  }
+  const onEnded = () => {
+    dispatch(nextMusic());
+  };
 
   const getTime = (time) => {
     const minute = `0${parseInt(time / 60, 10)}`;

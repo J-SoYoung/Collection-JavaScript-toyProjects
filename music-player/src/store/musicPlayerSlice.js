@@ -56,6 +56,8 @@ const initialState = {
   repeat: "ALL", // ONE SHUFFLE
 };
 
+const repeatMode = ["ONE", "ALL", "SHUPPLE"];
+
 // action-type, action-function, reducer합쳐짐
 const musicPlayerSlice = createSlice({
   name: "musicPlayer",
@@ -89,8 +91,20 @@ const musicPlayerSlice = createSlice({
         currentMusicId: state.playList[prevIndex].id,
       };
     },
+    setRepeat: (state, action) => {
+      return {
+        ...state,
+        repeat:
+          repeatMode[
+            // indexOf: 배열 메서드 중 하나, 특정 키워드를 찾아 index반환
+            // 버튼을 클릭하면 repeatMode의 배열을 반복하면서 결과값 반환
+            (repeatMode.indexOf(state.repeat) + 1) % repeatMode.length
+          ],
+      };
+    },
   },
 });
 
-export const { playMusic, stopMusic, nextMusic, prevMusic } = musicPlayerSlice.actions;
+export const { playMusic, stopMusic, nextMusic, prevMusic, setRepeat } =
+  musicPlayerSlice.actions;
 export default musicPlayerSlice.reducer;
