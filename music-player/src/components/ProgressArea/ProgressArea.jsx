@@ -5,16 +5,18 @@ import React, {
   useState,
 } from "react";
 import "./ProgressArea.scss";
-import { useDispatch } from "react-redux";
-import music1 from "../../music/music-1.mp3";
-import { playMusic, stopMusic } from "../../store/musicPlayerSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { nextMusic, playMusic, stopMusic } from "../../store/musicPlayerSlice";
 
 function ProgressArea(props, ref) {
   // ref: audio메서드가 참조된 ref
   // console.log(ref);
   const audio = useRef();
   const progressBar = useRef();
+
+  // dispatch, useSelector
   const dispatch = useDispatch();
+  const {playList,currentIndex } = useSelector((state) => state.musicPlayer);
 
   const [currentTime, setCurrentTime] = useState("00:00");
   const [duration, setDuration] = useState("00:00");
@@ -40,6 +42,10 @@ function ProgressArea(props, ref) {
   const onPause = () => {
     dispatch(stopMusic());
   };
+
+  const onEnded = () =>{
+    dispatch(nextMusic())
+  }
 
   const getTime = (time) => {
     const minute = `0${parseInt(time / 60, 10)}`;
@@ -70,7 +76,8 @@ function ProgressArea(props, ref) {
         <audio
           autoPlay
           ref={audio}
-          src={music1}
+          src={playList[currentIndex].src}
+          onEnded={onEnded}
           onPlay={onPlay}
           onPause={onPause}
           onTimeUpdate={onTimeUpdate}
