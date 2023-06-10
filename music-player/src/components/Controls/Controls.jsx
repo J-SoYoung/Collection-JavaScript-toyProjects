@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import RepeatIcon from "@mui/icons-material/Repeat";
 import RepeatOneIcon from "@mui/icons-material/RepeatOne";
 import PauseIcon from "@mui/icons-material/Pause";
@@ -50,22 +50,34 @@ const Controls = ({
   const onChangeVolume = (e) => {
     changeVolume(e.target.value);
   };
-  const onClickSkipPrev = () => {
-    dispatch(prevMusic());
-  };
-  const onClickSkipNext = () => {
-    dispatch(nextMusic());
-  };
+
+  const onClickPrevious = useCallback(() => {
+    if (repeat === "ONE") {
+      resetDuration();
+    } else {
+      dispatch(prevMusic());
+    }
+  }, [repeat, resetDuration, dispatch]);
+
+  const onClickNext = useCallback(() => {
+    if (repeat === "ONE") {
+      resetDuration();
+    } else {
+      dispatch(nextMusic());
+    }
+  }, [repeat, resetDuration, dispatch]);
+
   const onClickRepeatMode = () => {
     dispatch(setRepeat());
   };
+
   return (
     <div className="control-area">
       <QueueMusic sx={{ fontSize: 30, cursor: "pointer" }} />
       <RepeatButton repeat={repeat} onClick={onClickRepeatMode} />
       <SkipPrevious
         sx={{ fontSize: 30, cursor: "pointer" }}
-        onClick={onClickSkipPrev}
+        onClick={onClickPrevious}
       />
       {playing ? (
         <PauseIcon
@@ -81,7 +93,7 @@ const Controls = ({
       )}
       <SkipNext
         sx={{ fontSize: 30, cursor: "pointer" }}
-        onClick={onClickSkipNext}
+        onClick={onClickNext}
       />
       <div className="volume-container">
         <VolumeUpIcon sx={{ fontSize: 20 }} />
