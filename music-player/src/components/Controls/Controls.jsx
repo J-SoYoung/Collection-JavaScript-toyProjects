@@ -10,7 +10,24 @@ import ShuffleIcon from "@mui/icons-material/Shuffle";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import "./Controls.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { prevMusic, nextMusic } from "../../store/musicPlayerSlice";
+import { prevMusic, nextMusic, setRepeat } from "../../store/musicPlayerSlice";
+
+const RepeatButton = ({ repeat, ...props }) => {
+  switch (repeat) {
+    case "ALL":
+      return <RepeatIcon sx={{ fontSize: 30, cursor: "pointer" }} {...props} />;
+    case "ONE":
+      return (
+        <RepeatOneIcon sx={{ fontSize: 30, cursor: "pointer" }} {...props} />
+      );
+    case "SHUFFLE":
+      return (
+        <ShuffleIcon sx={{ fontSize: 30, cursor: "pointer" }} {...props} />
+      );
+    default:
+      return null;
+  }
+};
 
 const Controls = ({
   showMusicList,
@@ -21,7 +38,7 @@ const Controls = ({
   changeVolume,
 }) => {
   const dispatch = useDispatch();
-  const playing = useSelector((state) => state.musicPlayer.playing);
+  const { playing, repeat } = useSelector((state) => state.musicPlayer);
 
   const onClickPlay = () => {
     play();
@@ -39,11 +56,13 @@ const Controls = ({
   const onClickSkipNext = () => {
     dispatch(nextMusic());
   };
-
+  const onClickRepeatMode = () => {
+    dispatch(setRepeat());
+  };
   return (
     <div className="control-area">
       <QueueMusic sx={{ fontSize: 30, cursor: "pointer" }} />
-      <RepeatIcon sx={{ fontSize: 30, cursor: "pointer" }} />
+      <RepeatButton repeat={repeat} onClick={onClickRepeatMode} />
       <SkipPrevious
         sx={{ fontSize: 30, cursor: "pointer" }}
         onClick={onClickSkipPrev}

@@ -56,6 +56,13 @@ const initialState = {
   repeat: "ALL", // ONE SHUFFLE
 };
 
+const repeatMode = ["ONE", "ALL", "SHUFFLE"];
+const getrandomNumber = (arr, excludeNum) => {
+  const randomNumber = Math.floor(Math.random() * arr.length);
+  return arr[randomNumber] === excludeNum
+    ? getrandomNumber(arr, excludeNum)
+    : arr[randomNumber];
+};
 // action-type, action-function, reducer합쳐짐
 const musicPlayerSlice = createSlice({
   name: "musicPlayer",
@@ -68,10 +75,16 @@ const musicPlayerSlice = createSlice({
       return { ...state, playing: false };
     },
     nextMusic: (state, action) => {
-      // % 연산자는 정수만 반환한다.
       // 마지막 index의 음악이 끝난 경우, if문을 사용하지 않아도 index가 0결과값이 된다
       // => 처음으로 돌아간다
-      const nextIndex = (state.currentIndex + 1) % state.playList.length;
+      const nextIndex =
+        state.repeat === "SHUFFLE"
+          ? // playList.length길이만큼 인덱스 값을 가지고 있는 배열 생성, 제외할 index를 인수로 전달
+            getrandomNumber(
+              Array.from(Array(playList.length).keys()),
+              state.currentIndex
+            )
+          : (state.currentIndex + 1) % state.playList.length;
       return {
         ...state,
         currentIndex: nextIndex,
@@ -81,16 +94,34 @@ const musicPlayerSlice = createSlice({
     prevMusic: (state, action) => {
       // 0에서 이전곡으로 가면 마지막 음원이 나와야 하므로 4가 되어야 한다
       const prevIndex =
-        (state.currentIndex - 1 + state.playList.length) %
-        state.playList.length;
+        state.repeat === "SHUFFLE"
+          ? // playList.length길이만큼 인덱스 값을 가지고 있는 배열 생성, 제외할 index를 인수로 전달
+            getrandomNumber(
+              Array.from(Array(playList.length).keys()),
+              state.currentIndex
+            )
+          : (state.currentIndex - 1 + state.playList.length) %
+            state.playList.length;
       return {
         ...state,
         currentIndex: prevIndex,
         currentMusicId: state.playList[prevIndex].id,
       };
     },
+    setRepeat: (state, action) => {
+      return {
+        ...state,
+        repeat:
+          repeatMode[
+            // indexOf: 배열 메서드 중 하나, 특정 키워드를 찾아 index반환
+            // 버튼을 클릭하면 repeatMode의 배열을 반복하면서 결과값 반환
+            (repeatMode.indexOf(state.repeat) + 1) % repeatMode.length
+          ],
+      };
+    },
   },
 });
 
-export const { playMusic, stopMusic, nextMusic, prevMusic } = musicPlayerSlice.actions;
+export const { playMusic, stopMusic, nextMusic, prevMusic, setRepeat } =
+  musicPlayerSlice.actions;
 export default musicPlayerSlice.reducer;
