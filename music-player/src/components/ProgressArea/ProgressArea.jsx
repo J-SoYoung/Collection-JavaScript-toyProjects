@@ -3,6 +3,7 @@ import React, {
   useRef,
   forwardRef,
   useState,
+  useCallback,
 } from "react";
 import "./ProgressArea.scss";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +17,9 @@ function ProgressArea(props, ref) {
 
   // dispatch, useSelector
   const dispatch = useDispatch();
-  const { playList, currentIndex } = useSelector((state) => state.musicPlayer);
+  const { playList, currentIndex, repeat } = useSelector(
+    (state) => state.musicPlayer
+  );
 
   const [currentTime, setCurrentTime] = useState("00:00");
   const [duration, setDuration] = useState("00:00");
@@ -33,6 +36,9 @@ function ProgressArea(props, ref) {
     changeVolume: (volume) => {
       audio.current.volume = volume;
     },
+    resetDuration: () => {
+      audio.current.currentTime = 0;
+    },
   }));
 
   const onPlay = () => {
@@ -43,9 +49,14 @@ function ProgressArea(props, ref) {
     dispatch(stopMusic());
   };
 
-  const onEnded = () => {
-    dispatch(nextMusic());
-  };
+  const onEnded = useCallback(() => {
+    if (repeat === "ONE") {
+      audio.current.currentTime = 0;
+      audio.current.play();
+    } else {
+      dispatch(nextMusic());
+    }
+  }, [repeat, dispatch]);
 
   const getTime = (time) => {
     const minute = `0${parseInt(time / 60, 10)}`;
