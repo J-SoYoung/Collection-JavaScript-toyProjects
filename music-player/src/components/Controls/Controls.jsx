@@ -20,7 +20,7 @@ const RepeatButton = ({ repeat, ...props }) => {
       return (
         <RepeatOneIcon sx={{ fontSize: 30, cursor: "pointer" }} {...props} />
       );
-    case "SHUPPLE":
+    case "SHUFFLE":
       return (
         <ShuffleIcon sx={{ fontSize: 30, cursor: "pointer" }} {...props} />
       );
