@@ -75,3 +75,18 @@ https://www.notion.so/fun-blog/NOTE-d0f4f3b9f8574aff9738314e04043f7a <br>
 - TODOLIST의 CRUD를 구현하였다.
 - TodoList의 완료여부(DONE/TODO/ALL)에 따라 라우터를 구현하였다.
 - localStorage를 활용하여 사용자의 Todo-data를 저장할 수 있게 하였다.
+<br>
+
+# music-player
+https://github.com/thdud2262/miniPROJECT-01-React-JS/assets/85012454/bd133ddf-1a87-4c77-80bf-3226d85e7f8d
+
+### [ sortable ( lib ) ]
+- 🔎https://github.com/thdud2262/miniPROJECT-01-React-JS/tree/master/music_sortable
+- 드래그 앤 드롭 기능을 구현 -> npm에 @thdud/sortable-list의 lib로 배포하여 아래 music-player프로젝트에서 사용하였다. 
+
+### [ music-player (react) ]
+- 🔎https://github.com/thdud2262/miniPROJECT-01-React-JS/tree/master/music-player
+- redux-toolkit 라이브러리를 사용하여 프로젝트를 구현하였습니다.
+- audio태그에서 제공되는 메서드를 활용해 재생/정지기능, 볼륨, 이전/다음곡 기능을 구현하였습니다.
+- 음악 재생시간에 따른 프로그레스바를 구현하였습니다.
+- @thdud/sortable-list 라이브러리를 프로젝트에 적용하여 playlist의 드래그 앤 드롭 기능을 구현하였습니다.
