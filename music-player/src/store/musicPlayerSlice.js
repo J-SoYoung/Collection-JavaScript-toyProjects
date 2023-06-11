@@ -63,6 +63,7 @@ const getrandomNumber = (arr, excludeNum) => {
     ? getrandomNumber(arr, excludeNum)
     : arr[randomNumber];
 };
+
 // action-type, action-function, reducer합쳐짐
 const musicPlayerSlice = createSlice({
   name: "musicPlayer",
@@ -119,9 +120,22 @@ const musicPlayerSlice = createSlice({
           ],
       };
     },
+    setCurrentIndex: (state, action) => {
+      return {
+        ...state,
+        currentIndex: action.payload,
+        currentMusicId: state.playList[action.payload].id,
+      };
+    },
   },
 });
 
-export const { playMusic, stopMusic, nextMusic, prevMusic, setRepeat } =
-  musicPlayerSlice.actions;
+export const {
+  playMusic,
+  stopMusic,
+  nextMusic,
+  prevMusic,
+  setRepeat,
+  setCurrentIndex,
+} = musicPlayerSlice.actions;
 export default musicPlayerSlice.reducer;
