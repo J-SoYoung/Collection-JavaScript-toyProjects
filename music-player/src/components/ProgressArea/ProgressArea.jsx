@@ -4,6 +4,7 @@ import React, {
   forwardRef,
   useState,
   useCallback,
+  memo,
 } from "react";
 import "./ProgressArea.scss";
 import { useDispatch, useSelector } from "react-redux";
@@ -104,4 +105,4 @@ function ProgressArea(props, ref) {
 
 // forwardRef : ref를 직접 전달할 수 있도록 하는 hook이다.
 // 부모 컴포넌트에서 ref를 사용하여 자식 컴포넌트의 메서드에 접근할 수 있다.
-export default forwardRef(ProgressArea);
+export default memo(forwardRef(ProgressArea));

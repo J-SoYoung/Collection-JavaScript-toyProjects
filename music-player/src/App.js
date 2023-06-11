@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import "./App.scss";
 import Controls from "./components/Controls/Controls";
 import PlayList from "./components/PlayList/PlayList";
@@ -12,21 +12,24 @@ function App() {
   const audioRef = useRef();
   const [showPlayList, setShowPlayList] = useState(false);
 
-  const onPlay = () => {
+  // 최적화useCallback, playlist가 업데이트 된다고 해서 함수까지 재렌더링 될 필요는 없다
+  const onPlay = useCallback(() => {
     audioRef.current.play();
-  };
-  const onPause = () => {
+  }, []);
+  const onPause = useCallback(() => {
     audioRef.current.pause();
-  };
-  const changeVolume = (volume) => {
+  }, []);
+  const changeVolume = useCallback((volume) => {
     audioRef.current.changeVolume(volume);
-  };
-  const resetDuration = () => {
+  }, []);
+  const resetDuration = useCallback(() => {
     audioRef.current.resetDuration();
-  };
+  }, []);
+
   return (
     <div className="App">
       <div className="container">
+        {/* 최적화useMemo : 자신의 props가 변경되지 않았으면 굳이 재랜더링 할 필요없음 */}
         <SongDetail />
         <ProgressArea ref={audioRef} />
         <Controls

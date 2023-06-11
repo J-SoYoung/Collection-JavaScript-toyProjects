@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { memo, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentIndex, updatePlayList } from "../../store/musicPlayerSlice";
 import QueueMusic from "@mui/icons-material/QueueMusic";
@@ -58,4 +58,4 @@ const PlayList = ({ showPlayList, setShowPlayList }) => {
   );
 };
 
-export default PlayList;
+export default memo(PlayList);

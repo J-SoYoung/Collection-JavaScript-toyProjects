@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import "./SongDetail.scss";
 import img1 from "../../images/music-1.jpg";
 import { useSelector } from "react-redux";
@@ -27,4 +27,4 @@ function SongDetail() {
   );
 }
 
-export default SongDetail;
+export default memo(SongDetail);

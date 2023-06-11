@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { memo, useCallback } from "react";
 import RepeatIcon from "@mui/icons-material/Repeat";
 import RepeatOneIcon from "@mui/icons-material/RepeatOne";
 import PauseIcon from "@mui/icons-material/Pause";
@@ -118,4 +118,4 @@ const Controls = ({
   );
 };
 
-export default Controls;
+export default memo(Controls);
