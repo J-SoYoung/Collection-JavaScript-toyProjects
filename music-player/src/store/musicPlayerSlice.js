@@ -127,6 +127,16 @@ const musicPlayerSlice = createSlice({
         currentMusicId: state.playList[action.payload].id,
       };
     },
+    updatePlayList: (state, action) => {
+      const newPlayList = action.payload;
+      return {
+        ...state,
+        playList: newPlayList,
+        currentIndex: newPlayList.findIndex(
+          (music) => music.id === state.currentMusicId
+        ),
+      };
+    },
   },
 });
 
@@ -137,5 +147,6 @@ export const {
   prevMusic,
   setRepeat,
   setCurrentIndex,
+  updatePlayList,
 } = musicPlayerSlice.actions;
 export default musicPlayerSlice.reducer;
