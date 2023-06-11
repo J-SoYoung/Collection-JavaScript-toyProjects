@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setCurrentIndex } from "../../store/musicPlayerSlice";
+import { setCurrentIndex, updatePlayList } from "../../store/musicPlayerSlice";
 import QueueMusic from "@mui/icons-material/QueueMusic";
 import Close from "@mui/icons-material/Close";
 import PlayListItem from "./PlayListItem";
@@ -25,6 +25,10 @@ const PlayList = ({ showPlayList, setShowPlayList }) => {
     dispatch(setCurrentIndex(index));
   };
 
+  const onDropItem = (newPlayList) => {
+    dispatch(updatePlayList(newPlayList));
+  };
+
   return (
     <div className={classNames("play-list", { show: showPlayList })}>
       <div className="header">
@@ -41,6 +45,7 @@ const PlayList = ({ showPlayList, setShowPlayList }) => {
         data={playList}
         renderItem={renderItem}
         onClickItem={onClickItem}
+        onDropItem={onDropItem}
       />
       {/* <ul>
         {MusicList.map((item, index) => (
