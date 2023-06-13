@@ -8,7 +8,7 @@ https://www.notion.so/fun-blog/NOTE-d0f4f3b9f8574aff9738314e04043f7a <br>
 
 # keyboard
 ![image](https://user-images.githubusercontent.com/85012454/233993113-8010f9ec-94f2-4db7-988f-e94194a39079.png)
-### [ keyboard - javascript ]
+### [ keyboard - javascript강의 ]
 - 🔎 https://github.com/thdud2262/miniPROJECT-01/tree/master/keyboard
 - webpack, eslint, prettier등을 활용하여 개발환경을 설정합니다.
 - html, css를 이용하여 키보드 레이아웃을 구현합니다.
@@ -24,7 +24,7 @@ https://www.notion.so/fun-blog/NOTE-d0f4f3b9f8574aff9738314e04043f7a <br>
 
 # image-slider
 ![image](https://user-images.githubusercontent.com/85012454/233810284-7039c23c-d3d9-4b2a-ade0-f99e128c3ee8.png)
-### [ image-slider - javascript ]
+### [ image-slider - javascript강의 ]
 - 🔎 https://github.com/thdud2262/miniPROJECT-01/tree/master/image-slider
 - webpack모듈에서 image파일을 js-inline으로 설정하여 js와 함께 번들링합니다.
 - li태그에 img파일을 삽입하고, 버튼을 클릭할 때마다 li의 위치를 변경하여 image-slider를 구현합니다.
@@ -40,7 +40,7 @@ https://www.notion.so/fun-blog/NOTE-d0f4f3b9f8574aff9738314e04043f7a <br>
 # gallary
 ![image](https://user-images.githubusercontent.com/85012454/236586423-7a816b4b-1409-4d3c-9101-f3c28f02c6c8.png)
 
-### [ image-gallary (typescript) ]
+### [ image-gallary (typescript)강의 ]
 - 🔎 https://github.com/thdud2262/miniPROJECT-01/tree/master/gallary
 - new FileReader()를 사용해 파일 객체를 만들고 img파일을 추가합니다.
 - react-dropzone 라이브러리를 사용해 사용자가 드래그앤 드롭으로 이미지를 추가할 수 있도록 합니다.
@@ -55,7 +55,7 @@ https://www.notion.so/fun-blog/NOTE-d0f4f3b9f8574aff9738314e04043f7a <br>
 # date-picker
 ![image](https://github.com/thdud2262/miniPROJECT-01/assets/85012454/45bec232-ed5b-4d93-a296-80bb49e68187)
 
-### [ date-picker (javascript ) ]
+### [ date-picker (javascript )강의 ]
 - 🔎 https://github.com/thdud2262/miniPROJECT-01/tree/master/date-picker
 - calendar의 month와 date를 동적으로 생성하고, prev-next버튼을 클릭하여 월을 이동할 수 있다.
 - 사용자가 클릭한 date의 style을 지정할 수 있다.  
@@ -70,7 +70,7 @@ https://www.notion.so/fun-blog/NOTE-d0f4f3b9f8574aff9738314e04043f7a <br>
 ![image](https://github.com/thdud2262/miniPROJECT-01-React-JS/assets/85012454/8cd1f7ca-680d-4924-908f-e17985e0219d)
 
 
-### [ Todolist (javascript) ]
+### [ Todolist (javascript)강의 ]
 - 🔎https://github.com/thdud2262/miniPROJECT-01-React-JS/tree/master/todoList
 - TODOLIST의 CRUD를 구현하였다.
 - TodoList의 완료여부(DONE/TODO/ALL)에 따라 라우터를 구현하였다.
@@ -80,7 +80,7 @@ https://www.notion.so/fun-blog/NOTE-d0f4f3b9f8574aff9738314e04043f7a <br>
 # music-player
 https://github.com/thdud2262/miniPROJECT-01-React-JS/assets/85012454/bd133ddf-1a87-4c77-80bf-3226d85e7f8d
 
-### [ sortable ( lib ) ]
+### [ sortable ( lib )강의 ]
 - 🔎https://github.com/thdud2262/miniPROJECT-01-React-JS/tree/master/music_sortable
 - 드래그 앤 드롭 기능을 구현 -> npm에 @thdud/sortable-list의 lib로 배포하여 아래 music-player프로젝트에서 사용하였다. 
 
