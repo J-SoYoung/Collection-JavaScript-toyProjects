@@ -28,12 +28,21 @@ date메서드의 getDay, getDate를 활용해 월별 날짜를 구해 for문을 
 책에서만 보던 메서드와 문법을 활용해 실제 프로젝트에 적용해 볼 수 있는 시간이었다. <br>
 강의를 통해 자바스크립트의 활용법을 배우지만, 더 많이 익숙해진다면 나도 다양한 문법, 메서드의 활용을 할 수 있을 것이다!
 
-## Installation
+## 설치하기 Installation
+
 ```bash
 > npm install
 ```
-## Run Dev Server
+
+## 시작하기 Running the app
+
 ```bash
-> npm run start
+> npm start
+```
+
+## 빌드하기 Build
+
+```bash
+> npm run build
 ```
 ![image](https://github.com/thdud2262/miniPROJECT-01/assets/85012454/88299540-0a1d-45bb-8348-9b4d8817f1d0)
