@@ -14,19 +14,19 @@
   🔎 https://www.notion.so/fun-blog/5-3-01-Todolist-localStorage-8b803156e7084f6abff49b119d7d24fa
   <br>
   
-## Installation
+## 설치하기 Installation
 
 ```bash
 > npm install
 ```
 
-## Run Dev Server 
+## 시작하기 Running the app
 
 ```bash
-> npm run start
+> npm start
 ```
 
-## Build
+## 빌드하기 Build
 
 ```bash
 > npm run build
