@@ -15,20 +15,19 @@
 https://user-images.githubusercontent.com/85012454/233993952-5fac02b5-78d3-4b85-b559-a11b8492735a.mp4
 
 
-
-## Installation
+## 설치하기 Installation
 
 ```bash
 > npm install
 ```
 
-## Run Dev Server
+## 시작하기 Running the app
 
 ```bash
-> npm run dev
+> npm start
 ```
 
-## Build
+## 빌드하기 Build
 
 ```bash
 > npm run build
