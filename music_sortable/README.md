@@ -18,10 +18,10 @@
 그렇지 않으면 업데이트 내용이 반영되지 않는다. <br>
 <br>
 
-## sortable 라이브러리 test-start
+## sortable 라이브러리 설치 및 시작
 ```bash
 > npm install 
-> npm run start
+> npm start
 ```
 <br>
 
