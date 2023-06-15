@@ -13,11 +13,20 @@
 - state가 관리하는 imgList의 길이에 따라서 해당 태그의 className도 동적으로 추가하여 style을 다르게 주었다.
 - 라이브러리 드래그 앤 드롭을 사용하여 사용자가 버튼을 클릭하지 않고도 이미지를 추가할 수 있게 하였다
 
-## Installation
+## 설치하기 Installation
+
 ```bash
 > yarn install
 ```
-## Run Dev Server
+
+## 시작하기 Running the app
+
 ```bash
 > yarn start
+```
+
+## 빌드하기 Build
+
+```bash
+> yarn build
 ```
