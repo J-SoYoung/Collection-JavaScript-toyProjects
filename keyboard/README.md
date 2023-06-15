@@ -8,20 +8,19 @@ https://www.notion.so/fun-blog/4-1-WIL-73c79af9d06044628f6095dfed31d06f <br>
 - javaScript의 class를 통해 객체를 생성할 수 있다. 
 <br>
 
-## Installation
+## 설치하기 Installation
 
 ```bash
 > npm install
 ```
 
-
-## Run Dev Server
+## 시작하기 Running the app
 
 ```bash
-> npm run dev
+> npm start
 ```
 
-## Build
+## 빌드하기 Build
 
 ```bash
 > npm run build
