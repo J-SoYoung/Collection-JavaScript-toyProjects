@@ -18,11 +18,21 @@ https://github.com/thdud2262/miniPROJECT-01-React-JS/assets/85012454/70cdcd1f-1d
 <br>
 
 
-## Installation
+## 설치하기 Installation
+
 ```bash
 > npm install
 ```
-## Run Dev Server
+
+## 시작하기 Running the app
+
 ```bash
 > npm start
 ```
+
+## 빌드하기 Build
+
+```bash
+> npm run build
+```
+
