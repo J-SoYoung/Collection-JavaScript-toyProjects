@@ -12,14 +12,20 @@
 https://user-images.githubusercontent.com/85012454/235809652-67c4a898-df08-4fbd-b71a-1270b3ebfb77.mp4
 
 
-## Installation
+## 설치하기 Installation
 
 ```bash
 > yarn install
 ```
 
-## Run Dev Server
+## 시작하기 Running the app
 
 ```bash
 > yarn start
+```
+
+## 빌드하기 Build
+
+```bash
+> yarn build
 ```
