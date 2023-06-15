@@ -10,4 +10,23 @@ https://user-images.githubusercontent.com/85012454/232804837-626cef17-2343-4a81-
   🔎 https://www.notion.so/fun-blog/4-2-02-event-bubble-18e238d327a34d90ba648e5baa8de661 <br>
   
 - onKeyDown, onKeyUp를 활용하여 사용자의 키보드 입력을 받아 화면에 있는 키보드 이미지에 style을 주었습니다. 이때, 자바스크립트에서는 querySelector로 구현했던 부분을 react-hooks인 useRef를 사용하여 DOM요소를 참조하였습니다. <br>
-  🔎 https://www.notion.so/fun-blog/4-2-02-keyboard-event-useRef-b4bc0ca1b2194efc962897e0926a2e92
+  🔎 https://www.notion.so/fun-blog/4-2-02-keyboard-event-useRef-b4bc0ca1b2194efc962897e0926a2e92<br>
+  <br>
+
+## 설치하기 Installation
+
+```bash
+> yarn install
+```
+
+## 시작하기 Running the app
+
+```bash
+> yarn start
+```
+
+## 빌드하기 Build
+
+```bash
+> yarn build
+```
