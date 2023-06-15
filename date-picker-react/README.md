@@ -19,11 +19,20 @@
 
 ![image](https://github.com/thdud2262/miniPROJECT-01/assets/85012454/8c760aad-0d19-4aa6-98d9-d22746ebc09c)
 
-## Installation
+## 설치하기 Installation
+
 ```bash
 > yarn install
 ```
-## Run Dev Server
+
+## 시작하기 Running the app
+
 ```bash
 > yarn start
+```
+
+## 빌드하기 Build
+
+```bash
+> yarn build
 ```
