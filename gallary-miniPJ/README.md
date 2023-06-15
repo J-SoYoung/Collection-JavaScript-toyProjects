@@ -21,7 +21,23 @@
   img와 text는 각각 string이고, 객체로 묶어서 배열 안에 넣어야 한다.
 - interface를 생성하여 string타입의 image와 text를 객체로 묶어서 viewItem으로 정의를 해 놓는다.<br>
   이후 viewItem을 [ ] 배열로 묶어서 useState의 초기값으로 정의한다.
-  
 
 https://user-images.githubusercontent.com/85012454/236651370-f2d0bafa-1f57-46fd-856b-d8813bfe3d4d.mp4
 
+## 설치하기 Installation
+
+```bash
+> yarn install
+```
+
+## 시작하기 Running the app
+
+```bash
+> yarn start
+```
+
+## 빌드하기 Build
+
+```bash
+> yarn build
+```
