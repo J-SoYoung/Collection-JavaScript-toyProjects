@@ -6,7 +6,7 @@ https://www.notion.so/fun-blog/NOTE-d0f4f3b9f8574aff9738314e04043f7a <br>
 이후 **같은 주제로 리액트나 타입스크립트로 업그레이드**하여 다시 한번 개발해보는 시간을 가졌습니다.<br>
 <br>
 
-# keyboard
+# 01_keyboard
 ![image](https://user-images.githubusercontent.com/85012454/233993113-8010f9ec-94f2-4db7-988f-e94194a39079.png)
 ### [ keyboard - javascript강의 ]
 - 🔎 https://github.com/thdud2262/miniPROJECT-01/tree/master/keyboard
@@ -22,7 +22,7 @@ https://www.notion.so/fun-blog/NOTE-d0f4f3b9f8574aff9738314e04043f7a <br>
 - useState의 함수형 업데이트, useRef를 사용하여 실시간으로 사용자의 입력과 동일하게 스타일을 변경하는 키보드를 구현합니다.
 <br>
 
-# image-slider
+# 02_image-slider
 ![image](https://user-images.githubusercontent.com/85012454/233810284-7039c23c-d3d9-4b2a-ade0-f99e128c3ee8.png)
 ### [ image-slider - javascript강의 ]
 - 🔎 https://github.com/thdud2262/miniPROJECT-01/tree/master/image-slider
@@ -37,7 +37,7 @@ https://www.notion.so/fun-blog/NOTE-d0f4f3b9f8574aff9738314e04043f7a <br>
 - useState로 currentSlider값을 관리하여 slider의 현재 index를 화면에 띄워줍니다.
 <br>
 
-# gallary
+# 03_gallary
 ![image](https://user-images.githubusercontent.com/85012454/236586423-7a816b4b-1409-4d3c-9101-f3c28f02c6c8.png)
 
 ### [ image-gallary (typescript)강의 ]
@@ -52,7 +52,7 @@ https://www.notion.so/fun-blog/NOTE-d0f4f3b9f8574aff9738314e04043f7a <br>
 - typescript로 이미지와 텍스트를 포함하는 객체의 타입을 정의하였습니다.
 <br>
 
-# date-picker
+# 04_date-picker
 ![image](https://github.com/thdud2262/miniPROJECT-01/assets/85012454/45bec232-ed5b-4d93-a296-80bb49e68187)
 
 ### [ date-picker (javascript )강의 ]
@@ -66,7 +66,7 @@ https://www.notion.so/fun-blog/NOTE-d0f4f3b9f8574aff9738314e04043f7a <br>
 - react-hooks인 useState, useEffec를 활용하여 조건에 맞는 style과 함께 date태그를 동적으로 생성하였다.
 <br>
 
-# TODOLIST
+# 05_TODOLIST
 ![image](https://github.com/thdud2262/miniPROJECT-01-React-JS/assets/85012454/8cd1f7ca-680d-4924-908f-e17985e0219d)
 
 
@@ -77,7 +77,7 @@ https://www.notion.so/fun-blog/NOTE-d0f4f3b9f8574aff9738314e04043f7a <br>
 - localStorage를 활용하여 사용자의 Todo-data를 저장할 수 있게 하였다.
 <br>
 
-# music-player
+# 06_music-player
 https://github.com/thdud2262/miniPROJECT-01-React-JS/assets/85012454/bd133ddf-1a87-4c77-80bf-3226d85e7f8d
 
 ### [ sortable ( lib )강의 ]
