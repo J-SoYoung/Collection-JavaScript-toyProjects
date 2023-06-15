@@ -1,0 +1,131 @@
+@font-face {
+  font-family: "TheJamsil5Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  font-family: "TheJamsil5Bold";
+}
+.App {
+  width: 700px;
+  padding: 20px;
+}
+h1 {
+  color: teal;
+}
+.datePicker {
+  width: 560px;
+  margin: 0 auto;
+}
+
+.dateBox {
+  margin: 30px auto;
+  display: flex;
+  height: 60px;
+  width: 300px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+  color: #313131;
+  font-size: 28px;
+  cursor: pointer;
+}
+.dateBox:hover {
+  background-color: #f3f3f3;
+}
+
+.calendar {
+  border: 1px solid teal;
+  border-radius: 8px;
+}
+.calendar .month {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+  border-bottom: 2px solid #eee;
+}
+.calendar .month button {
+  width: 36px;
+  height: 36px;
+  padding: 8px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: #fff;
+}
+.month button:hover {
+  background-color: #eee;
+}
+.month button:active {
+  background-color: lightgray;
+}
+
+.calendar .days {
+  display: flex;
+  border-bottom: 2px solid #eee;
+  margin-bottom: 8px;
+}
+.calendar .days .day {
+  width: 80px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.days .sun {
+  color: red;
+}
+.days .sat {
+  color: blue;
+}
+.calendar .dates {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+.calendar .dates .date {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 78px;
+  height: 80px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.date:hover {
+  background-color: #f3f3f3;
+  border-radius: 8px;
+}
+
+.today {
+  background-color: tomato;
+  border-radius: 8px;
+}
+
+.selected {
+  background-color: rgb(26, 139, 139);
+  border-radius: 8px;
+}
+
+/* js로 동적으로 구현할 예정 */
+/* .calendar .dates .date:nth-child(7n + 0) {
+  color: blue;
+}
+.calendar .dates .date:nth-child(7n + 1) {
+  color: red;
+}
+.calendar .dates .date:first-child {
+  grid-column-start: 1;
+} */
