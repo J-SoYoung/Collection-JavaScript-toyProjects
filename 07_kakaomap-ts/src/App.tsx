@@ -65,7 +65,7 @@ function App() {
       >
         부산로
       </button>
-      <div ref={mapRef} style={{ width: 300, height: 300 }}></div>
+      <div ref={mapRef} style={{ width: 300, height: 300,margin:'20px auto' }}></div>
     </div>
   );
 }
