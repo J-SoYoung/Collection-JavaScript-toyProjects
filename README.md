@@ -5,18 +5,18 @@
 <a href='https://www.notion.so/fun-blog/NOTE-d0f4f3b9f8574aff9738314e04043f7a'>📕NOTION으로 이동하기</a><br>
 이번 미니프로젝트 시리즈에서는 프론트엔드 개발의 기본인 자바스크립트 **코딩력을 높이기 위해**,강의를 들으며 다양한드코드 활용법에 대해 공부했습니다.
 
-| 제목                                        | 내용                                                                              |
-| -------------------------------------------- | ----------------------------------------------------------------------------- | 
-| [:memo: project-main][project-main]       | 해당 프로젝트 메인으로 이동                                                                                         |
-| [:memo: keyboard][keyboard]                     | mouse event, keypress 이벤트를 활용하여 키보드 기능을 구현합니다.                                                   |
-| [:memo: keyboard2][keyboard-react]         | 자바스크립트로 키보드 미니 프로젝트를 리액트로 구현합니다                                                    |
-| [:memo: image-slider][image-slider]             | 자바스크립트를 이용하여 image-slider와 setInterval을 사용하여 autoplay를 구현합니다                                 |
-| [:memo: image-slider2][image-slider-react] | 자바스크립트 프로젝트를 리액트로 전환, useEffect와 useState를 활용합니다.                                                                                  |
-| [:memo: gallary][gallary]                       | new FileReader()를 사용해 파일 객체를 만들고 img파일을 추가합니다.                                                  |
-| [:memo: gallary-miniPJ][gallary-miniPJ]         | 사진 미리보기를 구현하여 추가 전 이미지를 볼 수 있도록 합니다        |
-| [:memo: date-picker][date-picker]               | calendar의 month와 date를 동적으로 생성하고, prev-next버튼을 클릭하여 월을 이동할 수 있습니다.                      |
-| [:memo: date-picker2][date-picker-react]   | 자바스크립트 캘린더 프로젝트를 react로 구현합니다                                                                                         |
-| [:memo: todoList][todoList]                     | 자바스트립트로 CRUD를 구현합니다. 완료 여부에 따라 라우터를 구현합니다. 이후 localstrage에 사용자 정보를 저장합니다 |     |
+| 제목                                                | 내용                                                                              |
+| ------------------------------------------------- | -------------------------------------------------------------------------------- | 
+| [:memo: project-main][project-main]              | 해당 프로젝트 메인으로 이동                                                             |
+| [:memo: keyboard][keyboard]                     | mouse event, keypress 이벤트를 활용하여 키보드 기능을 구현합니다.                          |
+| [:memo: keyboard2][keyboard-react]              | 자바스크립트로 키보드 미니 프로젝트를 리액트로 구현합니다                                    |
+| [:memo: image-slider][image-slider]             | 자바스크립트를 이용하여 image-slider와 setInterval을 사용하여 autoplay를 구현합니다           |
+| [:memo: image-slider2][image-slider-react]      | 자바스크립트 프로젝트를 리액트로 전환, useEffect와 useState를 활용합니다.                      |
+| [:memo: gallary][gallary]                       | new FileReader()를 사용해 파일 객체를 만들고 img파일을 추가합니다.                             |
+| [:memo: gallary-miniPJ][gallary-miniPJ]         | 사진 미리보기를 구현하여 추가 전 이미지를 볼 수 있도록 합니다                                    |
+| [:memo: date-picker][date-picker]               | calendar의 month와 date를 동적으로 생성하고, prev-next버튼을 클릭하여 월을 이동할 수 있습니다.   |
+| [:memo: date-picker2][date-picker-react]       | 자바스크립트 캘린더 프로젝트를 react로 구현합니다                                                |
+| [:memo: todoList][todoList]                     | 자바스트립트로 CRUD를 구현합니다. 이후 localstrage에 사용자 정보를 저장합니다                    |
 
 <!-- mini-project -->
 
