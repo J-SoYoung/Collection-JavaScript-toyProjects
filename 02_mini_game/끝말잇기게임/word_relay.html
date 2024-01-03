@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>끝말잇기</title>
+</head>
+
+<body>
+  <div> <span id="order">1</span> 번째 참가자</div>
+  <div>제시어: <span id="word"></span></div>
+  <input type="text" />
+  <button>입력</button>
+  <script>
+    const number = Number(prompt('몇 명이 참가하나요?'))
+    const $input = document.querySelector('input')
+    const $button = document.querySelector('button')
+    const $word = document.querySelector('#word')
+    const $order = document.querySelector('#order')
+
+    let word = '';
+    let newWord = '';
+    let order = 1;
+
+
+    const onClickButton = () => {
+      console.log(typeof (number), 'number-', number)
+      console.log(typeof (order), 'order-', order)
+      console.log(newWord)
+      $input.focus()
+      if ($input.value === '') {
+        alert('단어를 입력해주세요')
+        return
+      }
+
+      if (!word) {
+        // 단어가 비어있다
+        $input.focus()
+        word = newWord;
+        $word.textContent = word
+        $input.value = ''
+        // 다음으로 넘기기
+        order += 1
+        $order.textContent = order
+
+      } else {
+        // 단어가 비어있지 않다. 입력한 단어가 올바른지 확인한다.
+        if (word[word.length - 1] === newWord[0]) {
+          // 올바르게 입력한 경우
+          word = newWord;
+          $word.textContent = word
+          $input.value = ''
+          $input.focus()
+          // 다음으로 넘기기
+          if (order === number) {
+            order = 1
+            $order.textContent = order
+          } else {
+            order += 1
+            $order.textContent = order
+          }
+
+        } else {
+          // 올바르게 입력하지 않은 경우
+          alert('잘못입력하셨습니다. 게임을 종료합니다')
+          order = 1
+          $order.textContent = order
+          $input.value = ''
+          $word.textContent = ''
+          $input.focus()
+        }
+      }
+    }
+
+    const onInput = (e) => {
+      newWord = e.target.value
+    }
+
+    $input.addEventListener('input', onInput)
+    $button.addEventListener('click', onClickButton)
+
+
+  </script>
+  <script src="./basic.js"></script>
+</body>
+
+</html>
