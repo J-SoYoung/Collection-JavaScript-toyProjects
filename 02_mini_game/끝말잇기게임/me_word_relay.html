@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+  <button id="start_button">게임시작</button>
+  <div id="game_box" style="display: none;">
+    <div id="user_box"></div>
+    <div>
+      <spna id="order">1</spna>번 참가자
+    </div>
+    <div>제시어 : <span id="word"> </span></div>
+    <div><input type="text" /> <button id="word_enter_button">입력</button></div>
+  </div>
+
+  <script>
+    const $start_button = document.querySelector('#start_button')
+    const $game_box = document.querySelector('#game_box')
+    const $user_box = document.querySelector('#user_box')
+    const $order = document.querySelector('#order')
+    const $word = document.querySelector('#word')
+    const $input = document.querySelector('input')
+    const $word_enter_button = document.querySelector('#word_enter_button')
+
+    let number = 0
+    let heart = 0
+    let user = {
+      order: 1,
+      heart: 0
+    }
+    let order = 1
+    let word = ''
+    let newWord = ''
+
+    const gameOver = () => {
+      $game_box.style.display = 'none';
+      $start_button.style.display = 'block';
+    }
+
+    const resetGameData = () => {
+      order = 1;
+      word = ''
+      newWord = ''
+      $order.textContent = order
+      $input.value = "";
+      $word.textContent = "";
+    }
+
+    const onClickGameStart = () => {
+      number = Number(prompt('게임 참가자는 몇 명인가요?'))
+      if (number < 1) {
+        alert('최소 1명 이상은 있어야 게임이 시작됩니다.')
+        return
+      }
+      $game_box.style.display = 'block';
+      $start_button.style.display = 'none';
+      for (let i = 1; i <= number; i++) {
+        // 참가자 노드 생성
+        const userId = `${i}`
+        const $user_node = document.createElement('div')
+        const $span = document.createElement('span')
+        $user_node.textContent = `참가자 ${i} - `
+        $user_node.className = "user_node"
+        $user_node.id = userId
+        $span.className = 'heart'
+        $span.textContent = '♥'.repeat(3)
+
+        $user_node.appendChild($span)
+        $user_box.appendChild($user_node)
+      }
+      $input.focus();
+    }
+
+    const onInput = (e) => {
+      newWord = e.target.value;
+    }
+
+    const onClickButton = () => {
+      if (newWord.length !== 3) {
+        alert('3글자만 가능합니다')
+        $input.value = "";
+        $input.focus();
+        return
+      }
+
+      if (!word || word[word.length - 1] === newWord[0]) {
+        //단어를 옳게 작성했는가? 
+
+        word = newWord;
+        $word.textContent = newWord;
+        // 참가자의 번호에 따른 다음 사람 순서
+        if (order === number) {
+          order = 1;
+          $order.textContent = order;
+        } else {
+          order += 1;
+          $order.textContent = order
+        }
+        const $game_progress_user = document.getElementById(order)
+        $game_progress_user.style = 'border:1px solid'
+        // for (let i = 1; i <= number) // 반복문 사용해서 id랑 order랑 안맞는 애들 display='none해주기'
+        $input.value = "";
+        $input.focus();
+      } else {
+        //단어를 옳게 작성하지 않았는가? 
+        confirm('틀렸습니다. 게임을 다시 시작하겠습니까? ') ? onClickGameStart() : gameOver()
+        resetGameData()
+      }
+    }
+
+    $input.addEventListener('input', onInput)
+    $start_button.addEventListener('click', onClickGameStart)
+    $word_enter_button.addEventListener('click', onClickButton)
+
+
+  </script>
+
+</body>
+
+</html>
