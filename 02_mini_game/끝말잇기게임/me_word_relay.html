@@ -10,37 +10,49 @@
 </head>
 
 <body>
-  <button id="start_button">게임시작</button>
-  <div id="game_box" style="display: none;">
-    <div id="user_box"></div>
-    <div>
+  <div class="container">
+    <button id="start_button">게임시작</button>
+    <div id="game_container" style="display: none;">
+
+      <div class="given_word_container">
+        <div class="given_word">제시어 : <span id="word"></span></div>
+        <div class="word_input_div">
+          <input type="text" class="word_input" />
+          <button id="word_enter_button">입력</button>
+        </div>
+      </div>
+
+      <div id="participant_container">
+
+        <!-- 곧 사라질놈 -->
+      </div>
       <spna id="order">1</spna>번 참가자
     </div>
-    <div>제시어 : <span id="word"> </span></div>
-    <div><input type="text" /> <button id="word_enter_button">입력</button></div>
   </div>
 
   <script>
     const $start_button = document.querySelector('#start_button')
-    const $game_box = document.querySelector('#game_box')
-    const $user_box = document.querySelector('#user_box')
+    const $game_container = document.querySelector('#game_container')
     const $order = document.querySelector('#order')
     const $word = document.querySelector('#word')
     const $input = document.querySelector('input')
     const $word_enter_button = document.querySelector('#word_enter_button')
 
+    const $participant_container = document.querySelector('#participant_container')
+    const $participant_ul = document.createElement('ul');
+    const $participant_li = document.createElement('li');
+
+
     let number = 0
     let heart = 0
-    let user = {
-      order: 1,
-      heart: 0
-    }
+    let participant_list = []
+
     let order = 1
     let word = ''
     let newWord = ''
 
     const gameOver = () => {
-      $game_box.style.display = 'none';
+      $game_container.style.display = 'none';
       $start_button.style.display = 'block';
     }
 
@@ -59,27 +71,62 @@
         alert('최소 1명 이상은 있어야 게임이 시작됩니다.')
         return
       }
-      $game_box.style.display = 'block';
-      $start_button.style.display = 'none';
+      const htmlStringArray = [];
+
       for (let i = 1; i <= number; i++) {
         // 참가자 노드 생성
-        const userId = `${i}`
-        const $user_node = document.createElement('div')
-        const $span = document.createElement('span')
-        $user_node.textContent = `참가자 ${i} - `
-        $user_node.className = "user_node"
-        $user_node.id = userId
-        $span.className = 'heart'
-        $span.textContent = '♥'.repeat(3)
+        const userId = `userId_${i}`
 
-        $user_node.appendChild($span)
-        $user_box.appendChild($user_node)
+        const participantHTML = `
+          <div id="${userId}" class="participant">
+            <p>참가자 ${i} - <span class="heart">♥♥♥</span></p>
+          </div>
+        `;
+        htmlStringArray.push(participantHTML);
       }
+
+      $participant_container.innerHTML = htmlStringArray.join(''); // 한 번에 추가
+
+      $game_container.style.display = 'block';
+      $start_button.style.display = 'none';
+
+      // DOMParser를 통해 HTML을 파싱 + cloneNode node복제 =>  2975m.... 효율적이래매
+      // const participantHTML = `
+      //   <div id="${userId}" class="participant">
+      //     <p>참가자 ${i} - <span class="heart">♥♥♥</span></p>
+      //   </div>
+      // `;
+      // const parsedDocument = new DOMParser().parseFromString(participantHTML, 'text/html');
+      // const fragment = parsedDocument.body.firstChild.cloneNode(true);
+      // $participant_container.appendChild(fragment);
+
+
+      // 일일이 노드 생성해서 넣음 [Violation] 'click' handler took 2401ms 
+      // const $participant = document.createElement('div');
+      // const $participant_p = document.createElement('p');
+      // const $participant_span = document.createElement('span');
+
+      // $participant.id = userId
+      // $participant.className = 'participant'
+      // $participant_p.textContent = `참가자 ${i} - `;
+      // $participant_span.textContent = '♥'.repeat(3);
+      // $participant_span.className = 'heart';
+
+      // $participant_p.appendChild($participant_span)
+      // $participant.appendChild($participant_p)
+      // $participant_container.appendChild($participant)
+      // // 생성된 user를 새로운 배열에 넣어줘야 한다. 
+
       $input.focus();
     }
 
+
     const onInput = (e) => {
       newWord = e.target.value;
+    }
+
+    const participant_user = () => {
+
     }
 
     const onClickButton = () => {
@@ -92,9 +139,9 @@
 
       if (!word || word[word.length - 1] === newWord[0]) {
         //단어를 옳게 작성했는가? 
-
         word = newWord;
         $word.textContent = newWord;
+        $participant_li.textContent = newWord;
         // 참가자의 번호에 따른 다음 사람 순서
         if (order === number) {
           order = 1;

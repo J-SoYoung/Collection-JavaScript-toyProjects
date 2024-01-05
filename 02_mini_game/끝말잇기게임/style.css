@@ -1,15 +1,96 @@
-#user_box {
-  max-width: 500px;
-  height: 100%;
+@font-face {
+  font-family: "EASTARJET-Medium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/EASTARJET-Medium.woff2")
+    format("woff2");
+  font-weight: 500;
+  font-style: normal;
+}
+button {
+  font-family: "EASTARJET-Medium";
+}
+.container {
+  max-width: 700px;
+  min-height: 500px;
+  margin: 0 auto;
+  padding: 16px;
+  box-sizing: border-box;
+  border: 1px solid #fcc419;
+  border-radius: 4px;
+  font-family: "EASTARJET-Medium";
+}
+#start_button {
+  width: 200px;
+  height: 60px;
+  display: block;
+  margin: 30% auto;
+  padding: 8px;
+  box-sizing: border-box;
+  background-color: #fcc419;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 30px;
+  cursor: pointer;
+}
+#start_button:hover {
+  background-color: #f59f00;
+  box-shadow: 1px 1px 5px lightgray;
+}
+.given_word_container {
+  width: 250px;
+  margin: 0 auto 10px;
+  padding: 16px;
+}
+.given_word {
+  background-color: #fcc419;
+  border-radius: 8px;
+  padding: 16px;
+  box-sizing: border-box;
+  font-size: 20px;
+  color: white;
+}
+.word_input_div {
+  padding: 16px 0;
+  box-sizing: border-box;
+}
+.word_input {
+  width: 70%;
+  height: 30px;
+  border-radius: 4px;
+  border: 1px solid lightgray;
+  outline: none;
+  padding-left: 16px;
+}
+#word_enter_button {
+  width: 20%;
+  height: 30px;
+  padding: 4px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 4px;
+  background-color: #eee;
+  cursor: pointer;
+}
+#participant_container {
+  width: 100%;
   padding: 10px;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.user_node {
+.participant {
+  width: 200px;
   padding: 8px;
   box-sizing: border-box;
   background-color: #eee;
   border-radius: 8px;
+  text-align: center;
+}
+.participant_ul {
+  background-color: #fcc419;
+  color: white;
+  border-radius: 8px;
+  width: 100%;
+  min-height: 200px;
 }
