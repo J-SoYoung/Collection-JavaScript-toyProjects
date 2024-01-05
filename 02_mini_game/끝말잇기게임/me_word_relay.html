@@ -22,30 +22,21 @@
         </div>
       </div>
 
-      <div id="participant_container">
-
-        <!-- 곧 사라질놈 -->
-      </div>
-      <spna id="order">1</spna>번 참가자
+      <div id="participant_container"></div>
     </div>
   </div>
 
   <script>
     const $start_button = document.querySelector('#start_button')
     const $game_container = document.querySelector('#game_container')
-    const $order = document.querySelector('#order')
     const $word = document.querySelector('#word')
     const $input = document.querySelector('input')
     const $word_enter_button = document.querySelector('#word_enter_button')
 
     const $participant_container = document.querySelector('#participant_container')
-    const $participant_ul = document.createElement('ul');
-    const $participant_li = document.createElement('li');
-
 
     let number = 0
     let heart = 0
-    let participant_list = []
 
     let order = 1
     let word = ''
@@ -60,7 +51,6 @@
       order = 1;
       word = ''
       newWord = ''
-      $order.textContent = order
       $input.value = "";
       $word.textContent = "";
     }
@@ -76,7 +66,6 @@
       for (let i = 1; i <= number; i++) {
         // 참가자 노드 생성
         const userId = `userId_${i}`
-
         const participantHTML = `
           <div id="${userId}" class="participant">
             <p>참가자 ${i} - <span class="heart">♥♥♥</span></p>
@@ -84,49 +73,31 @@
         `;
         htmlStringArray.push(participantHTML);
       }
-
       $participant_container.innerHTML = htmlStringArray.join(''); // 한 번에 추가
-
       $game_container.style.display = 'block';
       $start_button.style.display = 'none';
 
-      // DOMParser를 통해 HTML을 파싱 + cloneNode node복제 =>  2975m.... 효율적이래매
-      // const participantHTML = `
-      //   <div id="${userId}" class="participant">
-      //     <p>참가자 ${i} - <span class="heart">♥♥♥</span></p>
-      //   </div>
-      // `;
-      // const parsedDocument = new DOMParser().parseFromString(participantHTML, 'text/html');
-      // const fragment = parsedDocument.body.firstChild.cloneNode(true);
-      // $participant_container.appendChild(fragment);
-
-
-      // 일일이 노드 생성해서 넣음 [Violation] 'click' handler took 2401ms 
-      // const $participant = document.createElement('div');
-      // const $participant_p = document.createElement('p');
-      // const $participant_span = document.createElement('span');
-
-      // $participant.id = userId
-      // $participant.className = 'participant'
-      // $participant_p.textContent = `참가자 ${i} - `;
-      // $participant_span.textContent = '♥'.repeat(3);
-      // $participant_span.className = 'heart';
-
-      // $participant_p.appendChild($participant_span)
-      // $participant.appendChild($participant_p)
-      // $participant_container.appendChild($participant)
-      // // 생성된 user를 새로운 배열에 넣어줘야 한다. 
-
+      // 처음 유저에게 style추가
+      highLightParticipant(1)
       $input.focus();
     }
-
 
     const onInput = (e) => {
       newWord = e.target.value;
     }
 
-    const participant_user = () => {
+    const highLightParticipant = (index) => {
+      // 이전에 스타일이 적용된 참가자의 스타일 제거
+      const prevParticipant = document.querySelector('.participant.active');
+      if (prevParticipant) {
+        prevParticipant.classList.remove('active');
+      }
 
+      // 현재 참가자에게 스타일 추가
+      const currentParticipant = document.querySelector(`#userId_${index}`);
+      if (currentParticipant) {
+        currentParticipant.classList.add('active');
+      }
     }
 
     const onClickButton = () => {
@@ -137,24 +108,31 @@
         return
       }
 
+      //단어를 옳게 작성했는가? 
       if (!word || word[word.length - 1] === newWord[0]) {
-        //단어를 옳게 작성했는가? 
+
         word = newWord;
         $word.textContent = newWord;
-        $participant_li.textContent = newWord;
+
+        // 참가자가 작성한 단어 띄우기
+        const $current_user = document.querySelector(`#userId_${order}`)
+        const $word_list = document.createElement('div')
+        $word_list.className = 'word_list'
+        $word_list.textContent = newWord
+        $current_user.appendChild($word_list)
+
         // 참가자의 번호에 따른 다음 사람 순서
         if (order === number) {
           order = 1;
-          $order.textContent = order;
         } else {
           order += 1;
-          $order.textContent = order
         }
-        const $game_progress_user = document.getElementById(order)
-        $game_progress_user.style = 'border:1px solid'
-        // for (let i = 1; i <= number) // 반복문 사용해서 id랑 order랑 안맞는 애들 display='none해주기'
+        // 참가자의 style
+        highLightParticipant(order)
+
         $input.value = "";
         $input.focus();
+
       } else {
         //단어를 옳게 작성하지 않았는가? 
         confirm('틀렸습니다. 게임을 다시 시작하겠습니까? ') ? onClickGameStart() : gameOver()
@@ -165,7 +143,6 @@
     $input.addEventListener('input', onInput)
     $start_button.addEventListener('click', onClickGameStart)
     $word_enter_button.addEventListener('click', onClickButton)
-
 
   </script>
 
