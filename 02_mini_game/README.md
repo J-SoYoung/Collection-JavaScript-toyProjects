@@ -54,21 +54,22 @@
       const $operator = document.querySelector('#operator')
       const $result = document.querySelector('#result')
 
-      const calculatorFunc = (number)=>{
+      // 고차 함수를 통해서 함수의 중복을 줄인다. 함수의 반환값을 함수로 정한다 
+      const calculatorFunc = (number)=> (event) =>{
         !operator ? numOne += number : numTwo += number
         $result.value += number
       }
 
-      document.querySelector('#num_0').addEventListener('click',()=>{calculatorFunc(0)})
-      document.querySelector('#num_1').addEventListener('click',()=>{calculatorFunc(1)})
-      document.querySelector('#num_2').addEventListener('click',()=>{calculatorFunc(2)})
-      document.querySelector('#num_3').addEventListener('click',()=>{calculatorFunc(3)})
-      document.querySelector('#num_4').addEventListener('click',()=>{calculatorFunc(4)})
-      document.querySelector('#num_5').addEventListener('click',()=>{calculatorFunc(5)})
-      document.querySelector('#num_6').addEventListener('click',()=>{calculatorFunc(6)})
-      document.querySelector('#num_7').addEventListener('click',()=>{calculatorFunc(7)})
-      document.querySelector('#num_8').addEventListener('click',()=>{calculatorFunc(8)})
-      document.querySelector('#num_9').addEventListener('click',()=>{calculatorFunc(9)})
+      document.querySelector('#num_0').addEventListener('click',calculatorFunc(0))
+      document.querySelector('#num_1').addEventListener('click',calculatorFunc(1))
+      document.querySelector('#num_2').addEventListener('click',calculatorFunc(2))
+      document.querySelector('#num_3').addEventListener('click',calculatorFunc(3))
+      document.querySelector('#num_4').addEventListener('click',calculatorFunc(4))
+      document.querySelector('#num_5').addEventListener('click',calculatorFunc(5))
+      document.querySelector('#num_6').addEventListener('click',calculatorFunc(6))
+      document.querySelector('#num_7').addEventListener('click',calculatorFunc(7))
+      document.querySelector('#num_8').addEventListener('click',calculatorFunc(8))
+      document.querySelector('#num_9').addEventListener('click',calculatorFunc(9))
 
       document.querySelector('#plus').addEventListener('click',()=>{})
       document.querySelector('#divide').addEventListener('click',()=>{})
