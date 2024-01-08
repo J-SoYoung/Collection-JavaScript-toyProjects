@@ -2,12 +2,13 @@
 
 ## 01-mini-Project
 
-<a href='https://www.notion.so/fun-blog/NOTE-d0f4f3b9f8574aff9738314e04043f7a'>📕NOTION으로 이동하기</a><br>
+### <a href='https://www.notion.so/fun-blog/NOTE-d0f4f3b9f8574aff9738314e04043f7a'>📕NOTION 이동</a><br>
+### [:memo: project-main 프로젝트 메인 이동 ][project-main]  <br>
+
 이번 미니프로젝트 시리즈에서는 프론트엔드 개발의 기본인 자바스크립트 **코딩력을 높이기 위해**,강의를 들으며 다양한드코드 활용법에 대해 공부했습니다.
 
 | 제목                                                | 내용                                                                              |
 | ------------------------------------------------- | -------------------------------------------------------------------------------- | 
-| [:memo: project-main][project-main]              | 해당 프로젝트 메인으로 이동                                                             |
 | [:memo: keyboard][keyboard]                     | mouse event, keypress 이벤트를 활용하여 키보드 기능을 구현합니다.                          |
 | [:memo: keyboard2][keyboard-react]              | 자바스크립트로 키보드 미니 프로젝트를 리액트로 구현합니다                                    |
 | [:memo: image-slider][image-slider]             | 자바스크립트를 이용하여 image-slider와 setInterval을 사용하여 autoplay를 구현합니다           |
