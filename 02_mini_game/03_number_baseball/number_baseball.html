@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #number_view {
+      width: 300px;
+      margin-bottom: 20px;
+      padding: 16px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      border: 1px solid;
+    }
+
+    #number_view>span {
+      width: 30px;
+      height: 30px;
+      margin: 0 10px;
+      padding: 4px;
+      box-sizing: border-box;
+      display: block;
+      text-align: center;
+      border: 1px solid;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="number_view">
+    <span>?</span>
+    <span>?</span>
+    <span>?</span>
+    <span>?</span>
+  </div>
+  <form id="form">
+    <input type="text" id="input" minlength="4" maxlength="4">
+    <button>확인</button>
+  </form>
+  <div id="logs"></div>
+</body>
+<script>
+  const $input = document.querySelector('#input')
+  const $form = document.querySelector('#form')
+  const $logs = document.querySelector('#logs')
+  const $number_view = document.querySelector('#number_view')
+
+  const num = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  const answer = []
+  for (let i = 0; i < 4; i++) {
+    const index = Math.floor(Math.random() * (num.length))
+    answer.push(num[index])
+    num.splice(index, 1)
+  }
+  console.log(answer)
+
+  // 검사하는 코드
+  const tries = []
+  const checkInput = (value) => {
+    if (value.length !== 4) {
+      return alert('4개의 숫자를 입력해주세요')
+    }
+    if (new Set(value).size !== 4) {
+      return alert('숫자가 중복되지 않게 입력해주세요')
+    }
+    if (tries.includes(value)) {
+      return alert('이미 시도한 값입니다')
+    }
+    return true;
+  }
+
+  $form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    const value = $input.value;
+
+    const $value_div = document.createElement('div')
+    $value_div.textContent = value
+    $logs.append($value_div)
+
+    $input.value = '';
+
+    const valid = checkInput(value)
+    tries.push(value)
+    console.log(tries)
+    if (!valid) return
+
+
+    // 사용자 입력값 검사
+    if (value === answer.join("")) {
+      alert('홈런')
+      $logs.textContent = '홈런'
+      return
+    }
+    // 기회 10번
+    if (tries.length >= 10) {
+      alert('숫자를 맞추지 못했습니다. ')
+      const message = document.createTextNode(`졌다. 정답은 ${answer.join('')}`)
+      logs.append(message)
+      $number_view.textContent = answer.join("")
+      return
+    }
+    // 볼, 스트라이크 표시
+    let strike = 0;
+    let ball = 0;
+    let out = 0
+    // ex) answer: 6513 / value: 6173 
+    for (let i = 0; i < answer.length; i++) {
+      const index = value.indexOf(answer[i])
+      if (index > -1) { // 맞는 숫자가 있는지
+        if (index === i) { // 자릿수도 맞는지
+          strike += 1
+        } else {
+          ball += 1
+        }
+      }
+    }
+
+
+    $value_div.innerHTML = `${value} : ball-${ball}, strike-${strike}`;
+  })
+</script>
+
+</html>
