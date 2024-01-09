@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .container {
+      width: 350px;
+      min-height: 100vh;
+      padding: 16px;
+      box-sizing: border-box;
+      background-color: aliceblue;
+      text-align: center;
+    }
+
+    #number_view {
+      width: 300px;
+      margin: 0 auto 20px;
+      padding: 16px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      border: 1px solid;
+      background-color: #eee;
+    }
+
+    #number_view>span {
+      width: 30px;
+      height: 30px;
+      margin: 0 10px;
+      padding: 4px;
+      box-sizing: border-box;
+      display: block;
+      text-align: center;
+      border: 1px solid;
+      background-color: white;
+    }
+
+    #form {
+      text-align: center;
+    }
+
+    .user_logs {
+      text-align: left;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div id="number_view">
+      <span>?</span>
+      <span>?</span>
+      <span>?</span>
+      <span>?</span>
+    </div>
+    <form id="form">
+      <input type="text" id="input" minlength="4" maxlength="4">
+      <button>확인</button>
+    </form>
+    <div id="logs_container">
+      <p id="logs_result"></p>
+    </div>
+  </div>
+
+  <script>
+    const $input = document.querySelector('#input');
+    const $form = document.querySelector('#form');
+    const $logs_container = document.querySelector('#logs_container');
+    const $logs_result = document.querySelector('#logs_result');
+    const $number_view = document.querySelector('#number_view');
+    const $answer_span = document.querySelectorAll('#number_view span');
+
+    const number = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const answer = [];
+    const tries = [];
+
+
+    // 숫자뽑기
+    for (let i = 0; i < 4; i++) {
+      const index = Math.floor(Math.random() * number.length)
+      answer.push(number[index])
+      number.splice(index, 1)
+    }
+    console.log(answer)
+
+    // 형식에 맞는가. 유효성 검사
+    const checkInput = (value) => {
+      if (value.length !== 4) {
+        return alert('4자리수를 입력해주세요')
+      }
+      if (new Set(value).size !== 4) {
+        return alert('중복된 숫자가 있습니다')
+      }
+      if (tries.indexOf(value) !== -1) {
+        return alert('이미 시도한 값입니다')
+      }
+      return true
+    }
+
+    // 정답확인
+    const correctAnswer = () => {
+      $answer_span.forEach((span, idx) => {
+        span.textContent = answer[idx].toString()
+      })
+    }
+
+    // 사용자 입력, submit 이벤트발생
+    $form.addEventListener('submit', (e) => {
+      e.preventDefault()
+      const value = $input.value
+      $input.value = ''
+
+      const $user_logs = document.createElement('p')
+      $user_logs.className = 'user_logs'
+      $user_logs.textContent = value
+      $logs_container.append($user_logs)
+
+      const valid = checkInput(value)
+      tries.push(value)
+      if (!valid) return
+
+      // 홈런인가
+      if (Number(answer.join("")) === Number(value)) {
+        alert('홈런입니다')
+        $user_logs.innerHTML = `<span>${value} : 홈런, 게임끝<span>`
+        correctAnswer()
+        return
+      }
+
+      // 10번의 기회가 있는가
+      if (tries.length > 9) {
+        alert('모든 기회가 끝났습니다.')
+        $user_logs.innerHTML = `<span>${value} : 모든 기회가 끝났습니다. 게임끝<span>`
+        correctAnswer()
+        return
+      }
+
+      // 모든 값이 맞지 않는가, OUT인가
+      let no_match = 0
+      let out = 0;
+      for (let i = 0; i < answer.length; i++) {
+        if (answer.indexOf(Number(value[i])) === -1) no_match += 1
+        if (no_match === 4) {
+          out += 1
+          $user_logs.innerHTML = `<span>${value} : 맞는 값이 없습니다 OUT-${out}<span>`
+        }
+        if (out === 3) {
+          alert('쓰리아웃')
+          $user_logs.innerHTML = `<span>${value} : 3 OUT. 게임끝<span>`
+          correctAnswer()
+        }
+      }
+
+      // Strike, ball - check
+      // ex) answer: 6513 / value: 6173
+      let strike = 0;
+      let ball = 0;
+      for (let i = 0; i < answer.length; i++) {
+        const index = value.indexOf(answer[i])
+        if (index > -1) { // 맞는 숫자있음
+          if (index === i) { // 자릿수도 맞음
+            strike += 1
+          } else {
+            ball += 1
+          }
+        }
+      }
+      $user_logs.innerHTML = `<span>${value} : strike-${strike}, ball-${ball} <span>`;
+      $input.focus()
+    })
+  </script>
+</body>
+
+</html>
