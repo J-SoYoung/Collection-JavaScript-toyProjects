@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .ball {
+      display: inline-block;
+      border: 1px solid black;
+      border-radius: 20px;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      font-size: 20px;
+      text-align: center;
+      margin-right: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="result">추첨 결과는? </div>
+  <div id="bonus">보너스: </div>
+
+  <script>
+    const candidate = Array(45).fill().map((ele, i) => i + 1)
+    console.log('45개의 숫자-', candidate)
+
+    const shuffle = []
+    while (shuffle.length < 7) {
+      const random = Math.floor(Math.random() * candidate.length)
+      console.log(random)
+      const spliceArray = candidate.splice(random, 1)
+      const value = spliceArray[0]
+      shuffle.push(value)
+    }
+    console.log('랜덤7개-', shuffle)
+
+  </script>
+</body>
+
+</html>
