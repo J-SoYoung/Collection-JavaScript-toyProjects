@@ -26,66 +26,77 @@
   <div id="result">추첨 번호는? </div>
   <div id="bonus">보너스: </div>
   <div id="compare">결과는? </div>
+  <button id="reset_button" style="display: none;">다시 하기</button>
 
   <script>
-    // 유저 공뽑기
+    // 게임 시작하기 
     let user_number = []
-    const user_input = prompt('1-45의 숫자중에서 7개의 숫자를 / 로 구분해 작성해주세요').split('/')
+    let winBalls = []
+    let bonus = []
+
+    const $start_button = document.querySelector('#start_button')
     const $result_button = document.querySelector('#result_button')
+    const $reset_button = document.getElementById('reset_button')
+    const $bonus = document.getElementById('bonus')
+    const $result = document.getElementById('result')
+    const $compare = document.getElementById('compare')
 
-    // 빈칸 확인 1/2/3/4/5/6/7/
-    // 중복 확인 
-    // 범위 확인
+    window.onload = startGame()
 
-    const check_user_number = (value) => {
-      if (value.length !== 7) {
-        return alert('7개의 숫자를 입력해주세요')
-      }
-      if (new Set(value).size !== 7) {
-        return alert('숫자가 중복되지 않게 입력해주세요')
-      }
-      for (let i = 0; i < value.length; i++) {
-        const range_number = Array(45).fill().map((ele, i) => i + 1)
-        if (!range_number.includes(Number(value[i]))) {
-          return alert('1~45범위 내의 숫자를 입력해주세요')
+    function startGame() {
+      // 유저 공뽑기
+      let user_input = prompt('1-45의 숫자중에서 7개의 숫자를 / 로 구분해 작성해주세요').split('/')
+
+      const check_user_number = (value) => {
+        if (value.length !== 7) {
+          return alert('7개의 숫자를 입력해주세요')
         }
+        if (new Set(value).size !== 7) {
+          return alert('숫자가 중복되지 않게 입력해주세요')
+        }
+        for (let i = 0; i < value.length; i++) {
+          const range_number = Array(45).fill().map((ele, i) => i + 1)
+          if (!range_number.includes(Number(value[i]))) {
+            return alert('1~45범위 내의 숫자를 입력해주세요')
+          }
+        }
+        return true;
       }
-      return true;
-    }
 
-    // prompt빈값
-    for (let i = 0; i < user_input.length; i++) {
-      user_input[i].trim()
-      if (user_input[i] !== '') user_number.push(user_input[i])
-    }
-    const check = check_user_number(user_number)
+      // prompt빈값 check
+      for (let i = 0; i < user_input.length; i++) {
+        user_input[i].trim()
+        if (user_input[i] !== '') user_number.push(user_input[i])
+      }
+      const check = check_user_number(user_number)
 
-    // user_ball그리기
-    const $user_ball_box = document.querySelector('#user_ball_box')
-    for (let i = 0; i < user_number.length; i++) {
-      const $user_ball = document.createElement('div')
-      $user_ball.className = 'ball'
-      $user_ball.textContent = user_number[i]
-      $user_ball_box.appendChild($user_ball)
-    }
+      // user_ball그리기
+      const $user_ball_box = document.querySelector('#user_ball_box')
+      for (let i = 0; i < user_number.length; i++) {
+        const $user_ball = document.createElement('div')
+        $user_ball.className = 'ball'
+        $user_ball.textContent = user_number[i]
+        $user_ball_box.appendChild($user_ball)
+      }
 
-    // 랜덤한 8개 공 뽑기
-    const candidate = Array(45).fill().map((ele, i) => i + 1)
-    const shuffle = []
-    while (shuffle.length < 7) {
-      const random = Math.floor(Math.random() * candidate.length)
-      const spliceArray = candidate.splice(random, 1)
-      const value = spliceArray[0]
-      shuffle.push(value)
+      // 랜덤한 8개 공 뽑기
+      const candidate = Array(45).fill().map((ele, i) => i + 1)
+      const shuffle = []
+      while (shuffle.length < 7) {
+        const random = Math.floor(Math.random() * candidate.length)
+        const spliceArray = candidate.splice(random, 1)
+        const value = spliceArray[0]
+        shuffle.push(value)
+      }
+      console.log(shuffle)
+      winBalls = shuffle.slice(0, 6).sort((a, b) => a - b)
+      bonus = shuffle[6]
     }
-    console.log(shuffle)
-    const winBalls = shuffle.slice(0, 6).sort((a, b) => a - b)
-    const bonus = shuffle[6]
-
 
     // 화면에 공 그리는 함수
-    async function drawBall(viewTag, value, seconds) {
-      return new Promise((resolve, reject) => {
+    function drawBall(viewTag, value, seconds) {
+      let results
+      return results = new Promise((resolve, reject) => {
         setTimeout(() => {
           const $ball = document.createElement('div')
           $ball.className = 'ball'
@@ -106,8 +117,12 @@
             $ball.style.backgroundColor = 'green'
           }
           viewTag.appendChild($ball)
-          resolve()
+
+          if ($ball) resolve()
+          else reject()
+          console.log(results)
         }, seconds)
+
       })
     }
 
@@ -117,30 +132,49 @@
       console.log(same_number)
 
       const $compare_result = document.createElement('div')
-      const $compare = document.getElementById('compare')
-
       $compare_result.textContent = `${same_number.length == 0 ? '맞는 번호가 없습니다' : `${same_number.join(',')}번호가 맞았습니다`}`
       $compare.appendChild($compare_result)
     }
 
     // 결과보기 클릭 
+    let isClicked = false;
     $result_button.addEventListener('click', async () => {
+      console.log(isClicked)
+      if (isClicked) {
+        return alert('진행중인 로또 추첨이 있습니다. 잠시 기다려주세요')
+      }
+      isClicked = true
 
       // 화면에 출력
-      const $result = document.getElementById('result')
       for (let i = 0; i < winBalls.length; i++) {
         await drawBall($result, winBalls[i], 1000)
       }
-
-      const $bonus = document.getElementById('bonus')
       await drawBall($bonus, bonus, 1000)
 
       // 유저숫자 - 랜덤숫자 비교
       const lottoball = [...winBalls, bonus]
       resultCompare(user_number, lottoball)
+
+      // 리셋버튼 보이기
+      $reset_button.style.display = 'block';
     })
 
+    // 게임 초기화하기
+    $reset_button.addEventListener('click', () => {
+      const $user_ball = document.getElementById('user_ball_box')
+      $reset_button.style.display = 'none';
+      isClicked = false;
 
+      $user_ball.textContent = '유저 볼:'
+      $result.textContent = '추첨 번호는? '
+      $bonus.textContent = '보너스: '
+      $compare.textContent = '결과는? '
+      user_number = []
+      winBalls = []
+      bonus = []
+
+      startGame()
+    })
 
   </script>
 </body>
