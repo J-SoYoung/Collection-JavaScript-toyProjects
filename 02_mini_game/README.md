@@ -16,4 +16,6 @@
 
 JavaScript의 비동기 처리에 대해 공부할 수 있었다.
 
-##
+## Rock Scissor Paper
+- setInterval, clearInterval 사용하여 타이머를 시작했다 멈췄다를 반복할 수 있다.
+
