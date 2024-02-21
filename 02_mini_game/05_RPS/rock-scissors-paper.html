@@ -35,7 +35,7 @@
     const $paper = document.querySelector('#paper');
 
     const IMG_URL = './rsp.png';
-    $computer.style.background = `url(${IMG_URL}) -440px 0`;
+    $computer.style.background = `url(${IMG_URL}) 0`;
     $computer.style.backgroundSize = 'auto 200px';
 
     const rspX = {
@@ -56,11 +56,11 @@
       $computer.style.background = `url(${IMG_URL}) ${rspX[computerChoice]} 0`;
       $computer.style.backgroundSize = 'auto 200px';
     }
+
     let intervalId = setInterval(changeComputerHand, 100);
 
     let isClicked = true
     function clickbutton(e) {
-
 
       if (isClicked) {
         clearInterval(intervalId)
@@ -68,25 +68,7 @@
 
         // 점수 계산 화면 표시
         let myChoice = e.target.id
-
         let gameScoreText = ''
-        // if (myChoice == 'rock') {
-        //   if (computerChoice === 'rock') { gameScore = '무승부' }
-        //   else if (computerChoice === 'paper') { gameScore = '졌습니다' }
-        //   else if (computerChoice === 'scissors') { gameScore = '이겼습니다' }
-        // }
-
-        // if (myChoice == 'paper') {
-        //   if (computerChoice === 'paper') { gameScore = '무승부' }
-        //   else if (computerChoice === 'scissors') { gameScore = '졌습니다' }
-        //   else if (computerChoice === 'rock') { gameScore = '이겼습니다' }
-        // }
-
-        // if (myChoice == 'scissors') {
-        //   if (computerChoice === 'scissors') { gameScore = '무승부' }
-        //   else if (computerChoice === 'rock') { gameScore = '졌습니다' }
-        //   else if (computerChoice === 'paper') { gameScore = '이겼습니다' }
-        // }
 
         // 가위:1 바위:0 보:-1
         // 나 - 컴퓨터 = 결과
@@ -95,7 +77,7 @@
         // 가위       0    1    2     
         // 바위      -1    0   -1  
         //   보      -2   -1    0
-        
+
         const scoreTable = {
           rock: 0,
           scissors: 1,
