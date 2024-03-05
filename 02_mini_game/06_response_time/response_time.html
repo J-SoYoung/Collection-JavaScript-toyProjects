@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #screen {
+      width: 300px;
+      height: 200px;
+      text-align: center;
+      user-select: none;
+    }
+
+    #screen.start {
+      background-color: rgb(19, 180, 255);
+    }
+
+    #screen.ready {
+      background-color: tomato;
+      color: white;
+    }
+
+    #screen.now {
+      background-color: teal;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="screen" class="start">클릭해서 시작하세요</div>
+  <div id="result"></div>
+  <script>
+    const $screen = document.querySelector('#screen');
+    const $result = document.querySelector('#result');
+
+    let timeoutId;
+    let startTime;
+    let endTime;
+    const records = []
+
+    $screen.addEventListener('click', () => {
+      if ($screen.classList.contains('start')) {
+
+        // Q빨강으로 전환
+        $screen.classList.replace('start', 'ready')
+        $screen.textContent = '초록화면이 나올 때까지 기다리세요'
+
+        timeoutId = setTimeout(function () {
+          $screen.classList.replace('ready', 'now')
+          $screen.textContent = '클릭하세요. 반응속도를 측정합니다'
+          // 첫시간 재기 
+          startTime = new Date().getTime()
+        }, Math.floor(Math.random() * 1000) + 2000)
+        return
+
+      } else if ($screen.classList.contains('ready')) {
+        clearTimeout(timeoutId)
+        alert('너무 빨리 클릭했어요@ 처음으로 되돌아갑니다')
+        $screen.classList.replace('ready', 'start')
+        $screen.textContent = '클릭해서 시작하세요'
+        return
+
+      } else if ($screen.classList.contains('now')) {
+        endTime = new Date().getTime()
+        const currentTime = endTime - startTime
+        records.push(currentTime)
+        console.log(records)
+
+        const average = records.reduce((acc, cur) => acc + cur) / records.length;
+        $result.textContent = `현재 ${currentTime / 1000}ms, 평균: ${average}ms`;
+
+        startTime = null
+        endTime = null
+        $screen.classList.replace('now', 'start')
+        $screen.textContent = '클릭해서 시작하세요--'
+
+        return
+      }
+    })
+
+  </script>
+</body>
+
+</html>
