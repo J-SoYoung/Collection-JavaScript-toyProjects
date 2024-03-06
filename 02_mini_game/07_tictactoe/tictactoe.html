@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tictactoe</title>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+
+    td {
+      border: 1px solid black;
+      width: 40px;
+      height: 40px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- <table>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </table> -->
+  <script>
+    const $table = document.createElement('table')
+    const $result = document.createElement('div')
+
+    // [
+    //   [td, td, td],
+    //   [td, td, td],
+    //   [td, td, td],
+    // ]
+
+    const rows = []
+    let turn = 'O'
+    let hasWinner = false
+    let count = 0
+
+    function checkWinner(target) {
+      let rowIndex;
+      let cellIndex;
+
+      rows.forEach((row, ri) => {
+        row.forEach((cell, ci) => {
+          if (cell === target) {
+            rowIndex = ri;
+            cellIndex = ci;
+          }
+        })
+      })
+      if (
+        // 세로줄 검사
+        rows[0][cellIndex].textContent === turn &&
+        rows[1][cellIndex].textContent === turn &&
+        rows[2][cellIndex].textContent === turn
+      ) {
+        hasWinner = true
+      } if (
+        // 가로줄 검사        
+        rows[rowIndex][0].textContent === turn &&
+        rows[rowIndex][1].textContent === turn &&
+        rows[rowIndex][2].textContent === turn
+      ) {
+        hasWinner = true
+      } if (
+        // 대각선 검사
+        rows[0][0].textContent === turn &&
+        rows[1][1].textContent === turn &&
+        rows[2][2].textContent === turn
+      ) {
+        hasWinner = true
+      } if (
+        // 대각선 검사
+        rows[0][2].textContent === turn &&
+        rows[1][1].textContent === turn &&
+        rows[2][0].textContent === turn
+      ) {
+        hasWinner = true
+      }
+      count += 1
+      return hasWinner
+    }
+
+    function callbackFunc(e) {
+      console.log(e.target)
+      // 빈칸 확인하기
+      if (e.target.textContent) {
+        alert('빈칸이 아닙니다!')
+        return
+      }
+      e.target.textContent = turn;
+
+      // 승부 판단하기
+      checkWinner(event.target)
+      if (hasWinner) {
+        $result.textContent = `${turn}님이 승리`
+        $table.removeEventListener('click', callbackFunc)
+        return
+      }
+      // 무승부 검사 (tabale이 다 차있으면)
+      if (count === 9) {
+        $result.textContent = '무승부입니단'
+      }
+      turn = turn === 'O' ? 'X' : "O"
+    }
+
+    // 표그리기 
+    for (let i = 0; i < 3; i++) {
+      const cells = []
+      const $tr = document.createElement('tr')
+      for (let j = 0; j < 3; j++) {
+        const $td = document.createElement('td')
+        cells.push($td)
+        $tr.appendChild($td)
+      }
+      rows.push(cells)
+      $table.appendChild($tr)
+    }
+    $table.addEventListener('click', callbackFunc)
+    document.body.appendChild($table)
+    document.body.appendChild($result)
+
+
+  </script>
+
+  <body>
+
+</html>
