@@ -34,7 +34,7 @@
   <script>
     const $screen = document.querySelector('#screen');
     const $result = document.querySelector('#result');
-
+    
     let timeoutId;
     let startTime;
     let endTime;
@@ -66,10 +66,16 @@
         endTime = new Date().getTime()
         const currentTime = endTime - startTime
         records.push(currentTime)
-        console.log(records)
+        records.sort((a, b) => a - b)
 
         const average = records.reduce((acc, cur) => acc + cur) / records.length;
         $result.textContent = `현재 ${currentTime / 1000}ms, 평균: ${average}ms`;
+
+        records.forEach((record, idx) => {
+          const $p = document.createElement('p')
+          $p.textContent = `${idx + 1}위 : ${record}초 걸렸습니다`
+          $result.appendChild($p)
+        })
 
         startTime = null
         endTime = null
