@@ -50,20 +50,12 @@
     const rows = []
     let turn = 'O'
     let hasWinner = false
-    let count = 0
 
     function checkWinner(target) {
-      let rowIndex;
-      let cellIndex;
+      //e.target은 자신의 index를 알고있다
+      const rowIndex = target.parentNode.rowIndex
+      const cellIndex = target.cellIndex
 
-      rows.forEach((row, ri) => {
-        row.forEach((cell, ci) => {
-          if (cell === target) {
-            rowIndex = ri;
-            cellIndex = ci;
-          }
-        })
-      })
       if (
         // 세로줄 검사
         rows[0][cellIndex].textContent === turn &&
@@ -93,12 +85,10 @@
       ) {
         hasWinner = true
       }
-      count += 1
       return hasWinner
     }
 
     function callbackFunc(e) {
-      console.log(e.target)
       // 빈칸 확인하기
       if (e.target.textContent) {
         alert('빈칸이 아닙니다!')
@@ -114,8 +104,10 @@
         return
       }
       // 무승부 검사 (tabale이 다 차있으면)
-      if (count === 9) {
-        $result.textContent = '무승부입니단'
+      const draw = rows.flat().every((cell) => cell.textContent);
+      if (draw) {
+        $result.textContent = `무승부입니다`;
+        return;
       }
       turn = turn === 'O' ? 'X' : "O"
     }
