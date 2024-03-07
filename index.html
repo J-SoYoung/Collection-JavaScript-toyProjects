@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>Hello, World!</h1>
+
+  <h1>First Game: Response Time</h1>
+  <div id="responseTimeContent"></div>
+
+  <h1>Second Game: Tic Tac Toe</h1>
+  <div id="tictactoeContent"></div>
+
+  <script>
+    // Fetch and load Tic Tac Toe content
+    fetch('/02_mini_game/07_tictactoe/tictactoe.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('tictactoeContent').innerHTML = html;
+        const scripts = document.getElementById('tictactoeContent').getElementsByTagName('script');
+        for (const script of scripts) {
+          eval(script.text);
+        }
+      })
+      .catch(error => console.error('Error loading Tic Tac Toe content:', error));
+
+    // Fetch and load Response Time content
+    fetch('/02_mini_game/06_response_time/response_time.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('responseTimeContent').innerHTML = html;
+        const scripts = document.getElementById('responseTimeContent').getElementsByTagName('script');
+        for (const script of scripts) {
+          eval(script.text);
+        }
+      })
+      .catch(error => console.error('Error loading Response Time content:', error));
+
+  </script>
+
+</body>
+
+</html>
