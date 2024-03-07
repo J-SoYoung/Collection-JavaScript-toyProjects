@@ -88,16 +88,9 @@
       return hasWinner
     }
 
-    function callbackFunc(e) {
-      // 빈칸 확인하기
-      if (e.target.textContent) {
-        alert('빈칸이 아닙니다!')
-        return
-      }
-      e.target.textContent = turn;
-
+    function drawTictacto(target) {
       // 승부 판단하기
-      checkWinner(event.target)
+      checkWinner(target)
       if (hasWinner) {
         $result.textContent = `${turn}님이 승리`
         $table.removeEventListener('click', callbackFunc)
@@ -109,7 +102,30 @@
         $result.textContent = `무승부입니다`;
         return;
       }
-      turn = turn === 'O' ? 'X' : "O"
+      turn = turn === 'O' ? "X" : "O"
+    }
+
+    let clickable = true;
+    function callbackFunc(e) {
+      // 빈칸 확인하기
+      if (e.target.textContent) {
+        alert('빈칸이 아닙니다!')
+        return
+      }
+
+      e.target.textContent = turn;
+      drawTictacto(e.target)
+
+      if (turn === 'X') {
+        const emptyCells = rows.flat().filter((v) => !v.textContent);
+        const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+        clickable = false;
+        setTimeout(() => {
+          randomCell.textContent = 'X';
+          drawTictacto(randomCell);
+          clickable = true;
+        }, 1000);
+      }
     }
 
     // 표그리기 
